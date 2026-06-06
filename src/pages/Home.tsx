@@ -5,7 +5,7 @@ import Skills from "../components/sections/Skills";
 import Experience from "../components/sections/Experience";
 import Projects from "../components/sections/Projects";
 import Services from "../components/sections/Services";
-import Testimonials from "../components/sections/Testimonials";
+import Testimonial from "../components/sections/Testimonial";
 import Contact from "../components/sections/Contact";
 
 const Home: React.FC = () => {
@@ -17,7 +17,7 @@ const Home: React.FC = () => {
       <Experience />
       <Projects featured={true} />
       <Services />
-      <Testimonials />
+      <Testimonial />
       <Contact />
     </>
   );
