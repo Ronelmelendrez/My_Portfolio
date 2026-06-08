@@ -38,7 +38,7 @@ const Hero: React.FC = () => {
               className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4"
             >
               Hi, I'm{" "}
-              <span className="gradient-text">John Doe</span>
+              <span className="gradient-text">Ronel Melendrez</span>
             </motion.h1>
 
             <motion.div
@@ -101,7 +101,7 @@ const Hero: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-electric to-cyan rounded-full blur-2xl opacity-60 animate-pulse"></div>
               <img
                 src="https://randomuser.me/api/portraits/men/32.jpg"
-                alt="John Doe"
+                alt="Ronel Melendrez"
                 className="relative rounded-full w-64 h-64 sm:w-80 sm:h-80 object-cover border-4 border-electric shadow-2xl"
               />
             </div>
