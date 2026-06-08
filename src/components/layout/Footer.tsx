@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-2xl font-bold gradient-text">John Doe</h3>
+            <h3 className="text-2xl font-bold gradient-text">Ronel Melendrez</h3>
             <p className="text-grayText mt-2">Full Stack Developer</p>
           </motion.div>
 
@@ -46,7 +46,7 @@ const Footer: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="text-center mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 text-grayText"
         >
-          <p>&copy; {currentYear} John Doe. All rights reserved.</p>
+          <p>&copy; {currentYear} Ronel Melendrez. All rights reserved.</p>
         </motion.div>
       </div>
     </footer>
