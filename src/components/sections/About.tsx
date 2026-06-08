@@ -39,7 +39,7 @@ const About: React.FC = () => {
             <div className="flex gap-4">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-electric rounded-full"></div>
-                <span className="text-gray-700 dark:text-gray-300">Bachelor's in CS</span>
+                <span className="text-gray-700 dark:text-gray-300">Bachelor's in IT</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-cyan rounded-full"></div>
