@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
 
 const socialLinks = [
-  { icon: FaGithub, href: "https://github.com", label: "GitHub" },
-  { icon: FaLinkedin, href: "https://linkedin.com", label: "LinkedIn" },
+  { icon: FaGithub, href: "https://github.com/Ronelmelendrez", label: "GitHub" },
+  { icon: FaLinkedin, href: "https://www.linkedin.com/in/ronel-melendrez-a1a5022ba/", label: "LinkedIn" },
   { icon: FaTwitter, href: "https://twitter.com", label: "Twitter" },
-  { icon: FaEnvelope, href: "mailto:contact@example.com", label: "Email" },
+  { icon: FaEnvelope, href: "mailto:ronelmelendrez01@gmail.com", label: "Email" },
 ];
 
 const SocialLinks: React.FC = () => {
