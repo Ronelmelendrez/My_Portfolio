@@ -57,23 +57,40 @@ const Skills: React.FC = () => {
           ))}
         </div>
 
-        {/* Animated Marquee */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.8 }}
-          className="mt-16 overflow-hidden"
+        {/* Tech Marquee */}
+<motion.div
+  initial={{ opacity: 0 }}
+  animate={isInView ? { opacity: 1 } : {}}
+  transition={{ delay: 0.8 }}
+  className="mt-16 overflow-hidden"
+>
+  <div className="flex w-max gap-8 whitespace-nowrap animate-marquee">
+    {[...Array(2)].map((_, ri) =>
+      skills.map((skill) => (
+        <span
+          key={`${ri}-${skill.name}`}
+          className="
+            flex-shrink-0
+            inline-flex
+            items-center
+            gap-2
+            rounded-lg
+            border border-slate-700/20
+            bg-slate-800/60
+            px-4 py-2
+            text-sm
+            font-mono
+            text-slate-400
+            backdrop-blur-sm
+          "
         >
-          <div className="flex gap-8 animate-spin-slow whitespace-nowrap">
-            {[...skills, ...skills].map((skill, i) => (
-              <span key={i} className="inline-flex items-center gap-2 text-lg font-medium text-gray-600 dark:text-gray-400">
-                <span className="text-2xl">{skill.icon}</span>
-                {skill.name}
-                <span className="mx-4 text-electric">•</span>
-              </span>
-            ))}
-          </div>
-        </motion.div>
+          <span className="text-xl">{skill.icon}</span>
+          {skill.name}
+        </span>
+      ))
+    )}
+  </div>
+</motion.div>
       </Container>
     </section>
   );
