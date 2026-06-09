@@ -64,7 +64,7 @@ const Skills: React.FC = () => {
   transition={{ delay: 0.8 }}
   className="mt-16 overflow-hidden"
 >
-  <div className="flex w-max gap-8 whitespace-nowrap animate-marquee">
+  <div className="flex w-max gap-8 whitespace-nowrap animate-marquee hover:[animation-play-state:paused]">
     {[...Array(2)].map((_, ri) =>
       skills.map((skill) => (
         <span
