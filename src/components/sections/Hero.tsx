@@ -111,7 +111,7 @@ const Hero: React.FC = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-electric to-cyan rounded-full blur-2xl opacity-60 animate-pulse"></div>
               <img
-                src="https://randomuser.me/api/portraits/men/32.jpg"
+                src="src/assets/images/me.png"
                 alt="Ronel Melendrez"
                 className="relative rounded-full w-64 h-64 sm:w-80 sm:h-80 object-cover border-4 border-electric shadow-2xl"
               />
