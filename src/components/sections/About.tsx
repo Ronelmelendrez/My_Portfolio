@@ -57,7 +57,7 @@ function useCounter(end: number, trigger: boolean): number {
   return count;
 }
 
-// GlassCard component - now uses Tailwind classes
+// GlassCard component
 const GlassCard: React.FC<{
   children: React.ReactNode;
   hover?: boolean;
@@ -122,30 +122,32 @@ const About: React.FC = () => {
                   👨‍💻
                 </div>
                 <div>
-                  <h3 className="text-slate-50 font-['Syne',sans-serif] text-xl m-0">
+                  {/* Name in JetBrains Mono */}
+                  <h3 className="text-slate-50 font-mono text-xl m-0">
                     Alex Morgan
                   </h3>
+                  {/* Role already uses font-mono */}
                   <span className="text-electric font-mono text-sm">
                     Senior Full Stack Engineer
                   </span>
                 </div>
               </div>
 
-              {/* Bio text */}
-              <p className="text-grayText dark:text-gray-400 leading-relaxed mb-5 text-sm">
+              {/* Bio text – now using font-mono */}
+              <p className="text-grayText dark:text-gray-400 leading-relaxed mb-5 text-sm font-mono">
                 I'm a full‑stack software engineer with {years}+ years of
                 experience building robust web applications. My journey in tech
                 started with a curiosity for how things work, which evolved into
                 a career focused on elegant solutions.
               </p>
-              <p className="text-grayText dark:text-gray-400 leading-relaxed mb-8 text-sm">
+              <p className="text-grayText dark:text-gray-400 leading-relaxed mb-8 text-sm font-mono">
                 I specialize in modern JavaScript frameworks and cloud
                 technologies, always staying up‑to‑date with industry trends.
                 When I'm not coding, I contribute to open‑source and mentor
                 aspiring developers.
               </p>
 
-              {/* Tags */}
+              {/* Tags already use font-mono */}
               <div className="flex flex-wrap gap-3">
                 {["Bachelor's in IT", "AWS Certified", "Open to Remote"].map(
                   (tag) => (
@@ -175,17 +177,18 @@ const About: React.FC = () => {
             <div className="grid gap-5">
               {stats.map(({ value, suffix, label }) => (
                 <GlassCard key={label} hover className="p-7 flex items-center gap-6">
-                  <div className="gradient-text font-['Syne',sans-serif] text-5xl font-extrabold min-w-[80px]">
+                  {/* Stats numbers now use font-mono (removed Syne) */}
+                  <div className="gradient-text font-mono text-5xl font-extrabold min-w-[80px]">
                     {value}
                     {suffix}
                   </div>
-                  <div className="text-grayText dark:text-gray-400 text-sm">
+                  <div className="text-grayText dark:text-gray-400 text-sm font-mono">
                     {label}
                   </div>
                 </GlassCard>
               ))}
 
-              {/* Social links */}
+              {/* Social links already use font-mono */}
               <GlassCard className="p-6">
                 <div className="flex justify-around gap-8">
                   {["github", "linkedin", "twitter", "email"].map((social) => (
