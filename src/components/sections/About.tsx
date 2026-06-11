@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Container from "../common/Container";
 import SectionTitle from "../common/SectionTitle";
 
-// Custom useInView hook (unchanged)
+// ------------------------------------------------------------------
+// Custom hooks (useInView, useCounter) – unchanged
+// ------------------------------------------------------------------
 function useInView(options?: { threshold?: number; once?: boolean }) {
   const [ref, setRef] = React.useState<HTMLElement | null>(null);
   const [inView, setInView] = React.useState(false);
@@ -34,7 +36,6 @@ function useInView(options?: { threshold?: number; once?: boolean }) {
   return { ref: setRef, inView };
 }
 
-// Counter hook (unchanged)
 function useCounter(end: number, trigger: boolean): number {
   const [count, setCount] = React.useState(0);
   React.useEffect(() => {
@@ -57,15 +58,38 @@ function useCounter(end: number, trigger: boolean): number {
   return count;
 }
 
-// GlassCard component
-const GlassCard: React.FC<{
+// ------------------------------------------------------------------
+// NEW: Interactive Glow Card – wraps any content with a mouse‑following
+// radial gradient that appears on hover. Uses your existing colours.
+// ------------------------------------------------------------------
+const InteractiveGlowCard: React.FC<{
   children: React.ReactNode;
-  hover?: boolean;
+  hover?: boolean;          // keep the original translateY + shadow effect
   className?: string;
-}> = ({ children, hover = false, className = "" }) => {
+  glowColor?: string;       // optional custom glow colour (CSS colour)
+}> = ({ children, hover = false, className = "", glowColor = "#00ffff" }) => {
+  const [isHovering, setIsHovering] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (cardRef.current) {
+      const rect = cardRef.current.getBoundingClientRect();
+      setMousePos({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    }
+  };
+
   return (
     <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
       className={`
+        relative overflow-hidden
         bg-navy-light/50 backdrop-blur-md rounded-2xl
         border border-electric/20
         transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
@@ -74,10 +98,23 @@ const GlassCard: React.FC<{
       `}
     >
       {children}
+
+      {/* Mouse-following radial glow (only visible on hover) */}
+      {isHovering && (
+        <div
+          className="absolute inset-0 pointer-events-none blur-[50px]"
+          style={{
+            background: `radial-gradient(circle 80px at ${mousePos.x}px ${mousePos.y}px, ${glowColor}, transparent)`,
+          }}
+        />
+      )}
     </div>
   );
 };
 
+// ------------------------------------------------------------------
+// MAIN About component – now uses InteractiveGlowCard everywhere
+// ------------------------------------------------------------------
 const About: React.FC = () => {
   const { ref, inView } = useInView({ threshold: 0.2, once: true });
 
@@ -101,14 +138,14 @@ const About: React.FC = () => {
           ref={ref}
           className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
         >
-          {/* Left column – Bio */}
+          {/* Left column – Bio card */}
           <div
             className={`
               transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)]
               ${inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"}
             `}
           >
-            <GlassCard className="p-10">
+            <InteractiveGlowCard hover className="p-10">
               {/* Avatar + name row */}
               <div className="flex items-center gap-4 mb-7">
                 <div
@@ -120,23 +157,22 @@ const About: React.FC = () => {
                   "
                 >
                   <img
-                src="src/assets/images/me.png"
-                alt="Ronel Melendrez"
-                className="w-[72px] h-[72px] rounded-full object-cover"/>
+                    src="src/assets/images/me.png"
+                    alt="Ronel Melendrez"
+                    className="w-[72px] h-[72px] rounded-full object-cover"
+                  />
                 </div>
                 <div>
-                  {/* Name in JetBrains Mono */}
                   <h3 className="text-slate-50 font-mono text-xl m-0">
                     Ronel Melendrez
                   </h3>
-                  {/* Role already uses font-mono */}
                   <span className="text-electric font-mono text-sm">
                     Senior Full Stack Engineer
                   </span>
                 </div>
               </div>
 
-              {/* Bio text – now using font-mono */}
+              {/* Bio text */}
               <p className="text-grayText dark:text-gray-400 leading-relaxed mb-5 text-sm font-mono">
                 I'm a full‑stack software engineer with {years}+ years of
                 experience building robust web applications. My journey in tech
@@ -150,27 +186,25 @@ const About: React.FC = () => {
                 aspiring developers.
               </p>
 
-              {/* Tags already use font-mono */}
+              {/* Tags */}
               <div className="flex flex-wrap gap-3">
-                {["Bachelor's in IT", "AWS Certified", "Open to Remote"].map(
-                  (tag) => (
-                    <span
-                      key={tag}
-                      className="
-                        px-3 py-1 rounded-lg
-                        bg-electric/10 border border-electric/20
-                        text-electric-light font-mono text-xs
-                      "
-                    >
-                      {tag}
-                    </span>
-                  )
-                )}
+                {["Bachelor's in IT", "AWS Certified", "Open to Remote"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="
+                      px-3 py-1 rounded-lg
+                      bg-electric/10 border border-electric/20
+                      text-electric-light font-mono text-xs
+                    "
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
-            </GlassCard>
+            </InteractiveGlowCard>
           </div>
 
-          {/* Right column – Stats & Social */}
+          {/* Right column – Stats & Social cards */}
           <div
             className={`
               transition-all duration-800 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)]
@@ -179,8 +213,7 @@ const About: React.FC = () => {
           >
             <div className="grid gap-5">
               {stats.map(({ value, suffix, label }) => (
-                <GlassCard key={label} hover className="p-7 flex items-center gap-6">
-                  {/* Stats numbers now use font-mono (removed Syne) */}
+                <InteractiveGlowCard key={label} hover className="p-7 flex items-center gap-6">
                   <div className="gradient-text font-mono text-5xl font-extrabold min-w-[80px]">
                     {value}
                     {suffix}
@@ -188,11 +221,11 @@ const About: React.FC = () => {
                   <div className="text-grayText dark:text-gray-400 text-sm font-mono">
                     {label}
                   </div>
-                </GlassCard>
+                </InteractiveGlowCard>
               ))}
 
-              {/* Social links already use font-mono */}
-              <GlassCard className="p-6">
+              {/* Social links card */}
+              <InteractiveGlowCard className="p-6">
                 <div className="flex justify-around gap-8">
                   {["github", "linkedin", "twitter", "email"].map((social) => (
                     <a
@@ -208,7 +241,7 @@ const About: React.FC = () => {
                     </a>
                   ))}
                 </div>
-              </GlassCard>
+              </InteractiveGlowCard>
             </div>
           </div>
         </div>
