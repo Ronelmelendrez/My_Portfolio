@@ -1,214 +1,209 @@
-import React, { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import React from "react";
 import Container from "../common/Container";
 import SectionTitle from "../common/SectionTitle";
 
+// Custom useInView hook (unchanged)
+function useInView(options?: { threshold?: number; once?: boolean }) {
+  const [ref, setRef] = React.useState<HTMLElement | null>(null);
+  const [inView, setInView] = React.useState(false);
+  const hasTriggered = React.useRef(false);
+
+  React.useEffect(() => {
+    if (!ref) return;
+    if (options?.once && hasTriggered.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          if (options?.once) {
+            hasTriggered.current = true;
+            observer.disconnect();
+          }
+        } else if (!options?.once) {
+          setInView(false);
+        }
+      },
+      { threshold: options?.threshold ?? 0 }
+    );
+
+    observer.observe(ref);
+    return () => observer.disconnect();
+  }, [ref, options?.threshold, options?.once]);
+
+  return { ref: setRef, inView };
+}
+
+// Counter hook (unchanged)
+function useCounter(end: number, trigger: boolean): number {
+  const [count, setCount] = React.useState(0);
+  React.useEffect(() => {
+    if (!trigger) return;
+    let start = 0;
+    const duration = 2000;
+    const stepTime = 20;
+    const increment = end / (duration / stepTime);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, stepTime);
+    return () => clearInterval(timer);
+  }, [end, trigger]);
+  return count;
+}
+
+// GlassCard component - now uses Tailwind classes
+const GlassCard: React.FC<{
+  children: React.ReactNode;
+  hover?: boolean;
+  className?: string;
+}> = ({ children, hover = false, className = "" }) => {
+  return (
+    <div
+      className={`
+        bg-navy-light/50 backdrop-blur-md rounded-2xl
+        border border-electric/20
+        transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
+        ${hover ? "hover:translate-y-[-4px] hover:shadow-2xl hover:shadow-electric/20" : ""}
+        ${className}
+      `}
+    >
+      {children}
+    </div>
+  );
+};
+
 const About: React.FC = () => {
-  const statsRef = useRef(null);
-  const isInView = useInView(statsRef, { once: true });
+  const { ref, inView } = useInView({ threshold: 0.2, once: true });
 
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  const [isHovering, setIsHovering] = useState(false);
-
-  const [mousePosition, setMousePosition] = useState({
-    x: 0,
-    y: 0,
-  });
-
-  const handleMouseMove = (
-    e: React.MouseEvent<HTMLElement>
-  ) => {
-    if (sectionRef.current) {
-      const rect = sectionRef.current.getBoundingClientRect();
-
-      setMousePosition({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
-    }
-  };
+  const years = useCounter(6, inView);
+  const projects = useCounter(20, inView);
+  const clients = useCounter(15, inView);
 
   const stats = [
-    { value: 5, label: "Years Experience", suffix: "+" },
-    { value: 20, label: "Projects Completed", suffix: "+" },
-    { value: 15, label: "Happy Clients", suffix: "+" },
+    { value: years, suffix: "+", label: "Years Experience" },
+    { value: projects, suffix: "+", label: "Projects Completed" },
+    { value: clients, suffix: "+", label: "Happy Clients" },
   ];
 
   return (
-    <section
-      ref={sectionRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-      className="relative overflow-hidden py-20 bg-gray-50 dark:bg-navy/30"
-    >
-      {/* Cursor Glow */}
-      {isHovering && (
-        <>
-          {/* Electric Glow */}
-          <motion.div
-            className="absolute inset-0 pointer-events-none blur-[90px]"
-            animate={{
-              opacity: 1,
-            }}
-            initial={{
-              opacity: 0,
-            }}
-            transition={{
-              duration: 0.2,
-            }}
-            style={{
-              background: `radial-gradient(
-                circle 180px at ${mousePosition.x}px ${mousePosition.y}px,
-                rgba(59,130,246,0.18),
-                transparent
-              )`,
-            }}
-          />
+    <section id="about" className="py-20 max-w-7xl mx-auto bg-transparent">
+      <Container>
+        <SectionTitle title="About Me" subtitle="Get to know me better" />
 
-          {/* Cyan Glow */}
-          <motion.div
-            className="absolute inset-0 pointer-events-none blur-[120px]"
-            animate={{
-              opacity: 1,
-            }}
-            initial={{
-              opacity: 0,
-            }}
-            transition={{
-              duration: 0.3,
-            }}
-            style={{
-              background: `radial-gradient(
-                circle 250px at ${mousePosition.x}px ${mousePosition.y}px,
-                rgba(6,182,212,0.10),
-                transparent
-              )`,
-            }}
-          />
-        </>
-      )}
-
-      <Container className="relative z-10">
-        <SectionTitle
-          title="About Me"
-          subtitle="Get to know me better"
-        />
-
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h3 className="mb-4 text-2xl font-bold">
-              Passionate Developer Creating Digital Solutions
-            </h3>
-
-            <p className="mb-4 leading-relaxed text-grayText dark:text-gray-400">
-              I'm a full-stack software engineer with over 5 years
-              of experience building robust web applications.
-              My journey in tech started with a curiosity for how
-              things work, which evolved into a career focused on
-              creating elegant solutions to complex problems.
-            </p>
-
-            <p className="mb-6 leading-relaxed text-grayText dark:text-gray-400">
-              I specialize in modern JavaScript frameworks and
-              cloud technologies, always staying up-to-date with
-              industry trends. When I'm not coding, I enjoy
-              contributing to open-source projects and mentoring
-              aspiring developers.
-            </p>
-
-            <div className="flex flex-wrap gap-6">
-              <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-electric" />
-                <span className="text-gray-700 dark:text-gray-300">
-                  Bachelor's in IT
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-cyan" />
-                <span className="text-gray-700 dark:text-gray-300">
-                  AWS Certified
-                </span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Stats */}
+        {/* Two column grid */}
+        <div
+          ref={ref}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        >
+          {/* Left column – Bio */}
           <div
-            ref={statsRef}
-            className="grid grid-cols-1 gap-6 sm:grid-cols-3"
+            className={`
+              transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)]
+              ${inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"}
+            `}
           >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
-                animate={
-                  isInView
-                    ? {
-                        opacity: 1,
-                        y: 0,
-                      }
-                    : {}
-                }
-                transition={{
-                  delay: index * 0.2,
-                  duration: 0.5,
-                }}
-                whileHover={{
-                  y: -8,
-                  scale: 1.03,
-                }}
-                className="
-                  group relative overflow-hidden
-                  rounded-2xl
-                  border border-white/10
-                  bg-white/70
-                  p-6
-                  text-center
-                  shadow-lg
-                  backdrop-blur-xl
-                  transition-all duration-300
-                  hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)]
-                  dark:bg-navy-light/80
-                "
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-electric/0 via-electric/5 to-cyan/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={
-                    isInView
-                      ? {
-                          scale: 1,
-                        }
-                      : {}
-                  }
-                  transition={{
-                    delay: index * 0.2 + 0.3,
-                    type: "spring",
-                  }}
-                  className="relative mb-2 text-4xl font-bold gradient-text"
+            <GlassCard className="p-10">
+              {/* Avatar + name row */}
+              <div className="flex items-center gap-4 mb-7">
+                <div
+                  className="
+                    w-[72px] h-[72px] rounded-full
+                    bg-gradient-to-br from-slate to-navy
+                    border-2 border-electric/40
+                    flex items-center justify-center text-3xl
+                  "
                 >
-                  {stat.value}
-                  {stat.suffix}
-                </motion.div>
+                  👨‍💻
+                </div>
+                <div>
+                  <h3 className="text-slate-50 font-['Syne',sans-serif] text-xl m-0">
+                    Alex Morgan
+                  </h3>
+                  <span className="text-electric font-mono text-sm">
+                    Senior Full Stack Engineer
+                  </span>
+                </div>
+              </div>
 
-                <p className="relative text-grayText dark:text-gray-400">
-                  {stat.label}
-                </p>
-              </motion.div>
-            ))}
+              {/* Bio text */}
+              <p className="text-grayText dark:text-gray-400 leading-relaxed mb-5 text-sm">
+                I'm a full‑stack software engineer with {years}+ years of
+                experience building robust web applications. My journey in tech
+                started with a curiosity for how things work, which evolved into
+                a career focused on elegant solutions.
+              </p>
+              <p className="text-grayText dark:text-gray-400 leading-relaxed mb-8 text-sm">
+                I specialize in modern JavaScript frameworks and cloud
+                technologies, always staying up‑to‑date with industry trends.
+                When I'm not coding, I contribute to open‑source and mentor
+                aspiring developers.
+              </p>
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-3">
+                {["Bachelor's in IT", "AWS Certified", "Open to Remote"].map(
+                  (tag) => (
+                    <span
+                      key={tag}
+                      className="
+                        px-3 py-1 rounded-lg
+                        bg-electric/10 border border-electric/20
+                        text-electric-light font-mono text-xs
+                      "
+                    >
+                      {tag}
+                    </span>
+                  )
+                )}
+              </div>
+            </GlassCard>
+          </div>
+
+          {/* Right column – Stats & Social */}
+          <div
+            className={`
+              transition-all duration-800 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)]
+              ${inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}
+            `}
+          >
+            <div className="grid gap-5">
+              {stats.map(({ value, suffix, label }) => (
+                <GlassCard key={label} hover className="p-7 flex items-center gap-6">
+                  <div className="gradient-text font-['Syne',sans-serif] text-5xl font-extrabold min-w-[80px]">
+                    {value}
+                    {suffix}
+                  </div>
+                  <div className="text-grayText dark:text-gray-400 text-sm">
+                    {label}
+                  </div>
+                </GlassCard>
+              ))}
+
+              {/* Social links */}
+              <GlassCard className="p-6">
+                <div className="flex justify-around gap-8">
+                  {["github", "linkedin", "twitter", "email"].map((social) => (
+                    <a
+                      key={social}
+                      href="#"
+                      className="
+                        text-grayText hover:text-electric
+                        uppercase tracking-wider text-xs font-mono
+                        transition-colors duration-200
+                      "
+                    >
+                      {social}
+                    </a>
+                  ))}
+                </div>
+              </GlassCard>
+            </div>
           </div>
         </div>
       </Container>
