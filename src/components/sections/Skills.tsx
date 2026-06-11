@@ -10,7 +10,7 @@ const Skills: React.FC = () => {
   const categories = [...new Set(skills.map((s) => s.category))];
 
   return (
-    <section className="font-mono relative overflow-hidden" ref={ref}>
+    <section className="font-mono py-20 relative overflow-hidden" ref={ref}>
       <div className="absolute inset-0 bg-gradient-to-br from-electric/5 via-transparent to-cyan/5 pointer-events-none"></div>
       <Container>
         <SectionTitle title="Skills & Technologies" subtitle="My technical expertise" />
