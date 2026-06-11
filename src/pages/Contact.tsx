@@ -11,7 +11,7 @@ const ContactPage: React.FC = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <section className="pt-20 pb-10 bg-gradient-to-b from-electric/5 to-transparent">
+      <section className="font-mono pt-20 pb-10 bg-gradient-to-b from-electric/5 to-transparent">
         <Container>
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">Contact Me</h1>

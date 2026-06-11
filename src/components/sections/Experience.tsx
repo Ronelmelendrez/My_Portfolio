@@ -17,7 +17,7 @@ const Experience: React.FC = () => {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden py-20 bg-gray-50 dark:bg-navy/30"
+      className="font-mono relative overflow-hidden py-20 bg-gray-50 dark:bg-navy/30"
     >
       <Container>
         <SectionTitle

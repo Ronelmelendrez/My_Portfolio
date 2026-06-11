@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
         scrolled ? "glass shadow-lg py-3" : "bg-transparent py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="font-mono max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <Link to="/">
             <motion.div
@@ -98,7 +98,7 @@ const Navbar: React.FC = () => {
         transition={{ duration: 0.3 }}
         className="md:hidden overflow-hidden glass mt-3"
       >
-        <div className="flex flex-col items-center gap-4 py-6">
+        <div className="font-mono flex flex-col items-center gap-4 py-6">
           {navLinks.map((link) => (
             <Link
               key={link.path}

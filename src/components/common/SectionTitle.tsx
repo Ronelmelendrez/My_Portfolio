@@ -16,7 +16,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({ title, subtitle, centered =
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
-      <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      <h2 className="text-3xl md:text-4xl font-bold mb-4 font-mono">
         <span className="gradient-text">{title}</span>
       </h2>
       {subtitle && <p className="text-grayText dark:text-gray-400 text-lg max-w-2xl mx-auto">{subtitle}</p>}

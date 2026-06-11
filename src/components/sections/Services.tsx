@@ -24,7 +24,7 @@ const iconMap: Record<string, React.ElementType> = {
 
 const Services: React.FC = () => {
   return (
-    <section className="py-20 bg-gray-50 dark:bg-navy/30">
+    <section className="font-monopy-20 bg-gray-50 dark:bg-navy/30">
       <Container>
         <SectionTitle
           title="Services I Offer"

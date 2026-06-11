@@ -41,7 +41,7 @@ const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="py-20 bg-gray-50 dark:bg-navy/30"
+      className="font-mono py-20 bg-gray-50 dark:bg-navy/30"
     >
       <Container>
         <SectionTitle

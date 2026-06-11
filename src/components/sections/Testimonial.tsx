@@ -17,7 +17,7 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className="py-20">
+    <section className="font-mono py-20">
       <Container>
         <SectionTitle title="Client Testimonials" subtitle="What people say about my work" />
 

@@ -28,7 +28,7 @@ const Projects: React.FC<ProjectsProps> = ({ featured = false }) => {
         );
 
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section className="font-mono relative py-20 overflow-hidden">
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-0 h-72 w-72 rounded-full bg-electric/10 blur-3xl" />
