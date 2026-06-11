@@ -27,21 +27,16 @@ const getLogoUrl = (skillName: string): string => {
     GitLab: "gitlab",
     Docker: "docker",
     Kubernetes: "kubernetes",
-    AWS: "amazonaws",
-    Firebase: "firebase",
-    MongoDB: "mongodb",
+    "Express.js": "express", 
     PostgreSQL: "postgresql",
     MySQL: "mysql",
     Figma: "figma",
     "Vue.js": "vuedotjs",
-    Angular: "angular",
     "Next.js": "nextdotjs",
-    "Nuxt.js": "nuxtdotjs",
-    Svelte: "svelte",
     Express: "express",
     Supabase: "supabase",
     Render: "render",
-    "React Native": "reactnative",
+    "React Native": "react",
   };
   const slug = slugMap[skillName] || "code";
   return `https://cdn.simpleicons.org/${slug}/00ffff`; // electric colour
