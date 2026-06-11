@@ -167,15 +167,15 @@ const About: React.FC = () => {
                     Ronel Melendrez
                   </h3>
                   <span className="text-electric font-mono text-sm">
-                    Senior Full Stack Engineer
+                     Junior Full-Stack Developer
                   </span>
                 </div>
               </div>
 
               {/* Bio text */}
               <p className="text-grayText dark:text-gray-400 leading-relaxed mb-5 text-sm font-mono">
-                I'm a full‑stack software engineer with {years}+ years of
-                experience building robust web applications. My journey in tech
+                I'm a full‑stack developer with {years}+ years of
+                experience building robust web and mobile applications. My journey in tech
                 started with a curiosity for how things work, which evolved into
                 a career focused on elegant solutions.
               </p>
@@ -188,7 +188,7 @@ const About: React.FC = () => {
 
               {/* Tags */}
               <div className="flex flex-wrap gap-3">
-                {["Bachelor's in IT", "AWS Certified", "Open to Remote"].map((tag) => (
+                {["Bachelor's in IT", "CTO", "Open to Remote"].map((tag) => (
                   <span
                     key={tag}
                     className="
