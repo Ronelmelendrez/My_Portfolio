@@ -41,9 +41,10 @@ const getLogoUrl = (skillName: string): string => {
     Express: "express",
     Supabase: "supabase",
     Render: "render",
+    "React Native": "reactnative",
   };
   const slug = slugMap[skillName] || "code";
-  return `https://cdn.simpleicons.org/${slug}/00ffff`;
+  return `https://cdn.simpleicons.org/${slug}/00ffff`; // electric colour
 };
 
 // ------------------------------------------------------------
@@ -102,7 +103,7 @@ const CircularProgress: React.FC<{ percentage: number; inView: boolean }> = ({
 };
 
 // ------------------------------------------------------------
-// Skills Component with Tabs
+// Skills Component with Tabs & Flat "All" Grid
 // ------------------------------------------------------------
 const Skills: React.FC = () => {
   const ref = useRef(null);
@@ -115,15 +116,12 @@ const Skills: React.FC = () => {
 
   // Filter skills based on selected tab
   const filteredSkills =
-    selectedTab === "All" ? skills : skills.filter((s) => s.category === selectedTab);
+    selectedTab === "All"
+      ? skills
+      : skills.filter((s) => s.category === selectedTab);
 
-  // For "All" view, group by category; for specific tab, show flat list
-  const groupedSkills = selectedTab === "All"
-    ? allCategories.map((cat) => ({
-        category: cat,
-        items: skills.filter((s) => s.category === cat),
-      }))
-    : [{ category: selectedTab, items: filteredSkills }];
+  // Single flat list – no category groupings
+  const groupedSkills = [{ items: filteredSkills }];
 
   return (
     <section className="font-mono py-20 relative overflow-hidden" ref={ref}>
@@ -152,19 +150,19 @@ const Skills: React.FC = () => {
           ))}
         </div>
 
-        {/* Skills Grid */}
+        {/* Skills Grid – always flat (no category headings) */}
         <div className="space-y-12">
           {groupedSkills.map((group, groupIndex) => (
             <motion.div
-              key={group.category}
+              key={groupIndex}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: groupIndex * 0.1, duration: 0.5 }}
             >
-              {/* Only show category title when "All" is selected (or always, but for single tab it's redundant) */}
-              {selectedTab === "All" && (
+              {/* Optional: show current category heading only for non-All tabs */}
+              {selectedTab !== "All" && (
                 <h3 className="text-2xl font-semibold mb-6 gradient-text">
-                  {group.category}
+                  {selectedTab}
                 </h3>
               )}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -183,6 +181,7 @@ const Skills: React.FC = () => {
 
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-4">
+                        {/* Official logo */}
                         <img
                           src={getLogoUrl(skill.name)}
                           alt={`${skill.name} logo`}
@@ -210,7 +209,7 @@ const Skills: React.FC = () => {
           ))}
         </div>
 
-        {/* Tech Marquee (shows all skills regardless of tab) */}
+        {/* Tech Marquee (shows all skills) */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
