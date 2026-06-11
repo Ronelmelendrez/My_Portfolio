@@ -92,7 +92,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-20 max-w-7xl mx-auto bg-transparent">
+    <section id="about" className="font-mono py-20 max-w-7xl mx-auto bg-transparent">
       <Container>
         <SectionTitle title="About Me" subtitle="Get to know me better" />
 
@@ -113,18 +113,21 @@ const About: React.FC = () => {
               <div className="flex items-center gap-4 mb-7">
                 <div
                   className="
-                    w-[72px] h-[72px] rounded-full
+                    w-[77px] h-[77px] rounded-full
                     bg-gradient-to-br from-slate to-navy
                     border-2 border-electric/40
                     flex items-center justify-center text-3xl
                   "
                 >
-                  👨‍💻
+                  <img
+                src="src/assets/images/me.png"
+                alt="Ronel Melendrez"
+                className="w-[72px] h-[72px] rounded-full object-cover"/>
                 </div>
                 <div>
                   {/* Name in JetBrains Mono */}
                   <h3 className="text-slate-50 font-mono text-xl m-0">
-                    Alex Morgan
+                    Ronel Melendrez
                   </h3>
                   {/* Role already uses font-mono */}
                   <span className="text-electric font-mono text-sm">
