@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Container from "../common/Container";
 import SectionTitle from "../common/SectionTitle";
@@ -8,46 +8,46 @@ import { skills } from "../../data/skills";
 // Helper: Get official logo URL (Simple Icons CDN)
 // ------------------------------------------------------------
 const getLogoUrl = (skillName: string): string => {
-  // Map skill names to Simple Icons slugs (lowercase, spaces replaced by hyphens)
   const slugMap: Record<string, string> = {
-    "React": "react",
-    "TypeScript": "typescript",
-    "JavaScript": "javascript",
+    React: "react",
+    TypeScript: "typescript",
+    JavaScript: "javascript",
     "Node.js": "nodedotjs",
-    "Python": "python",
-    "Java": "java",
+    Python: "python",
+    Java: "java",
     "C#": "csharp",
-    "PHP": "php",
-    "HTML5": "html5",
-    "CSS3": "css3",
+    PHP: "php",
+    HTML5: "html5",
+    CSS3: "css3",
     "Tailwind CSS": "tailwindcss",
-    "Bootstrap": "bootstrap",
-    "Sass": "sass",
-    "Git": "git",
-    "GitHub": "github",
-    "GitLab": "gitlab",
-    "Docker": "docker",
-    "Kubernetes": "kubernetes",
-    "AWS": "amazonaws",
-    "Firebase": "firebase",
-    "MongoDB": "mongodb",
-    "PostgreSQL": "postgresql",
-    "MySQL": "mysql",
-    "Figma": "figma",
+    Bootstrap: "bootstrap",
+    Sass: "sass",
+    Git: "git",
+    GitHub: "github",
+    GitLab: "gitlab",
+    Docker: "docker",
+    Kubernetes: "kubernetes",
+    AWS: "amazonaws",
+    Firebase: "firebase",
+    MongoDB: "mongodb",
+    PostgreSQL: "postgresql",
+    MySQL: "mysql",
+    Figma: "figma",
     "Vue.js": "vuedotjs",
-    "Angular": "angular",
+    Angular: "angular",
     "Next.js": "nextdotjs",
     "Nuxt.js": "nuxtdotjs",
-    "Svelte": "svelte",
+    Svelte: "svelte",
+    Express: "express",
+    Supabase: "supabase",
+    Render: "render",
   };
-
-  // Find slug or fallback to a default (e.g., "code")
   const slug = slugMap[skillName] || "code";
-  return `https://cdn.simpleicons.org/${slug}/00ffff`; // electric colour (#00ffff)
+  return `https://cdn.simpleicons.org/${slug}/00ffff`;
 };
 
 // ------------------------------------------------------------
-// Circular Progress Component (unchanged)
+// Circular Progress Component
 // ------------------------------------------------------------
 const CircularProgress: React.FC<{ percentage: number; inView: boolean }> = ({
   percentage,
@@ -102,12 +102,28 @@ const CircularProgress: React.FC<{ percentage: number; inView: boolean }> = ({
 };
 
 // ------------------------------------------------------------
-// Skills Component (updated with logos)
+// Skills Component with Tabs
 // ------------------------------------------------------------
 const Skills: React.FC = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-  const categories = [...new Set(skills.map((s) => s.category))];
+  const [selectedTab, setSelectedTab] = useState<string>("All");
+
+  // Get unique categories from skills
+  const allCategories = [...new Set(skills.map((s) => s.category))];
+  const tabs = ["All", ...allCategories];
+
+  // Filter skills based on selected tab
+  const filteredSkills =
+    selectedTab === "All" ? skills : skills.filter((s) => s.category === selectedTab);
+
+  // For "All" view, group by category; for specific tab, show flat list
+  const groupedSkills = selectedTab === "All"
+    ? allCategories.map((cat) => ({
+        category: cat,
+        items: skills.filter((s) => s.category === cat),
+      }))
+    : [{ category: selectedTab, items: filteredSkills }];
 
   return (
     <section className="font-mono py-20 relative overflow-hidden" ref={ref}>
@@ -115,59 +131,86 @@ const Skills: React.FC = () => {
       <Container>
         <SectionTitle title="Skills & Technologies" subtitle="My technical expertise" />
 
+        {/* Tabs */}
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setSelectedTab(tab)}
+              className={`
+                px-5 py-2 rounded-full font-mono text-sm font-medium
+                transition-all duration-200
+                ${
+                  selectedTab === tab
+                    ? "bg-electric text-navy-dark shadow-lg shadow-electric/30"
+                    : "bg-navy-light/50 text-grayText hover:text-electric border border-electric/20"
+                }
+              `}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        {/* Skills Grid */}
         <div className="space-y-12">
-          {categories.map((category, catIndex) => (
+          {groupedSkills.map((group, groupIndex) => (
             <motion.div
-              key={category}
+              key={group.category}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: catIndex * 0.1, duration: 0.5 }}
+              transition={{ delay: groupIndex * 0.1, duration: 0.5 }}
             >
-              <h3 className="text-2xl font-semibold mb-6 gradient-text">{category}</h3>
+              {/* Only show category title when "All" is selected (or always, but for single tab it's redundant) */}
+              {selectedTab === "All" && (
+                <h3 className="text-2xl font-semibold mb-6 gradient-text">
+                  {group.category}
+                </h3>
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {skills
-                  .filter((skill) => skill.category === category)
-                  .map((skill, index) => (
-                    <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ delay: catIndex * 0.1 + index * 0.05 }}
-                      whileHover={{ scale: 1.05, y: -5 }}
-                      className="group relative p-6 rounded-xl bg-white dark:bg-navy-light shadow-lg hover:shadow-electric/20 transition-all duration-300 overflow-hidden"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-electric/0 via-electric/5 to-cyan/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                      
-                      {/* Left side: logo + name */}
-                      <div className="flex items-start justify-between">
-                        <div className="flex items-center gap-4">
-                          {/* Replace emoji with official logo */}
-                          <img
-                            src={getLogoUrl(skill.name)}
-                            alt={`${skill.name} logo`}
-                            className="w-8 h-8 object-contain"
-                            onError={(e) => {
-                              // Fallback to skill.icon (emoji) if logo fails to load
-                              const target = e.target as HTMLImageElement;
-                              target.style.display = "none";
-                              const fallback = document.createElement("span");
-                              fallback.className = "text-3xl";
-                              fallback.textContent = skill.icon;
-                              target.parentNode?.insertBefore(fallback, target);
-                            }}
-                          />
-                          <h4 className="text-xl font-semibold">{skill.name}</h4>
-                        </div>
-                        <CircularProgress percentage={skill.proficiency} inView={isInView} />
+                {group.items.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{
+                      delay: groupIndex * 0.1 + index * 0.05,
+                    }}
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    className="group relative p-6 rounded-xl bg-white dark:bg-navy-light shadow-lg hover:shadow-electric/20 transition-all duration-300 overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-electric/0 via-electric/5 to-cyan/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-4">
+                        <img
+                          src={getLogoUrl(skill.name)}
+                          alt={`${skill.name} logo`}
+                          className="w-8 h-8 object-contain"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = "none";
+                            const fallback = document.createElement("span");
+                            fallback.className = "text-3xl";
+                            fallback.textContent = skill.icon;
+                            target.parentNode?.insertBefore(fallback, target);
+                          }}
+                        />
+                        <h4 className="text-xl font-semibold">{skill.name}</h4>
                       </div>
-                    </motion.div>
-                  ))}
+                      <CircularProgress
+                        percentage={skill.proficiency}
+                        inView={isInView}
+                      />
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Tech Marquee (unchanged) */}
+        {/* Tech Marquee (shows all skills regardless of tab) */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
