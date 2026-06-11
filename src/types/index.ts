@@ -36,6 +36,7 @@ export interface Testimonial {
 export interface Skill {
   id: number;
   name: string;
-  level: string;
   icon?: string;
+  proficiency: number;
+  category: string;
 }
