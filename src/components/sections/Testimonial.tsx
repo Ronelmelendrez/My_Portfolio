@@ -95,14 +95,14 @@ const TestimonialTooltip: React.FC<TestimonialTooltipProps> = ({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.2 }}
-              className="relative bg-slate-900 dark:bg-navy-dark rounded-2xl shadow-2xl p-5 text-left"
+              className="relative bg-gray-800 rounded-2xl shadow-2xl p-5 text-left"
             >
               {/* Tooltip arrow */}
-              <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 h-3 w-3 rotate-45 bg-slate-900 dark:bg-navy-dark" />
+              <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 h-3 w-3 rotate-45 bg-gray-800" />
 
               <FaQuoteLeft className="text-electric/40 text-2xl mb-3" />
 
-              <p className="text-slate-200 dark:text-gray-300 text-sm md:text-base leading-relaxed mb-4">
+              <p className="text-gray-200 text-sm md:text-base leading-relaxed mb-4">
                 {testimonial.feedback}
               </p>
 
@@ -116,7 +116,7 @@ const TestimonialTooltip: React.FC<TestimonialTooltipProps> = ({
                   <h4 className="font-bold text-white text-sm">
                     {testimonial.name}
                   </h4>
-                  <p className="text-slate-400 text-xs">
+                  <p className="text-gray-400 text-xs">
                     {testimonial.role} at {testimonial.company}
                   </p>
                 </div>
@@ -164,10 +164,10 @@ const Testimonials: React.FC = () => {
                 />
               ))}
             </span>
-            <span>have shared their experience working with me.</span>
+            <span> have shared their experience working with me.</span>
           </div>
 
-          {/* Optional: subtle hint */}
+          {/* Optional hint */}
           <p className="text-sm text-slate-500 dark:text-gray-500 mt-8">
             Hover or focus on any avatar to read the testimonial
           </p>
