@@ -7,8 +7,10 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
+    // Full‑width background, no horizontal padding
     <footer className="w-full bg-black text-white">
-      <div className="md:w-2/3 w-full px-4 mx-auto flex flex-col py-16">
+      {/* Inner container: no horizontal padding, centered on large screens */}
+      <div className="md:w-2/3 w-full mx-auto py-16" style={{ paddingLeft: 0, paddingRight: 0 }}>
         {/* Top CTA section */}
         <div className="w-full text-5xl md:text-7xl font-bold">
           <h1 className="w-full md:w-2/3 leading-tight">
@@ -33,7 +35,7 @@ const Footer: React.FC = () => {
         {/* Bottom links and social */}
         <div className="flex flex-col mt-16">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0 mb-12">
-            {/* Logo / Brand */}
+            {/* Brand */}
             <div className="order-2 md:order-1">
               <h3 className="text-2xl font-bold tracking-tight">Ronel Melendrez</h3>
               <p className="text-gray-400 text-sm mt-1">Full Stack Developer</p>
@@ -47,7 +49,7 @@ const Footer: React.FC = () => {
               <Link to="/contact" className="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase transition-colors">Contact</Link>
             </div>
 
-            {/* Social Links Component (GitHub, LinkedIn, Twitter, Email) */}
+            {/* Social Links */}
             <div className="order-3">
               <SocialLinks />
             </div>
