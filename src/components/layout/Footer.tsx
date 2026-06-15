@@ -64,6 +64,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
+          <hr className="border-gray-200 dark:border-white/10" />
 
           <p className="w-full text-center mt-12 text-grayText">
             Copyright © {currentYear} Ronel Melendrez. All rights reserved.
