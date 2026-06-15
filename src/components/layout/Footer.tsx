@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
 
   return (
     // Full‑width background, no horizontal padding
-    <footer className="w-full bg-black text-white">
+    <footer className="font-mono w-full bg-black text-white">
       {/* Inner container: no horizontal padding, centered on large screens */}
       <div className="md:w-2/3 w-full mx-auto py-16" style={{ paddingLeft: 0, paddingRight: 0 }}>
         {/* Top CTA section */}
