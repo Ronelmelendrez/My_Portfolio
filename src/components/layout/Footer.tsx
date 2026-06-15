@@ -13,8 +13,8 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="font-mono w-full bg-gray-50 dark:bg-navy text-gray-900 dark:text-white border-t border-gray-200 dark:border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <footer className="font-mono w-full  bg-white/80 dark:bg-navy-light/80 text-gray-900 dark:text-white border-t border-gray-200 dark:border-white/10 mt-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Top CTA section */}
         <div className="w-full text-5xl md:text-7xl font-bold">
           <h1 className="w-full md:w-2/3 leading-tight">
@@ -64,9 +64,8 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          <hr className="border-gray-200 dark:border-white/10" />
 
-          <p className="w-full text-center my-12 text-grayText">
+          <p className="w-full text-center mt-12 text-grayText">
             Copyright © {currentYear} Ronel Melendrez. All rights reserved.
           </p>
         </div>
