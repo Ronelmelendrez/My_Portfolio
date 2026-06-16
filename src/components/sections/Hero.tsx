@@ -1,62 +1,278 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useCallback, useRef } from "react";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import Button from "../common/Button";
 import SocialLinks from "../common/SocialLinks";
 import { TypeAnimation } from "react-type-animation";
+import ParticleField from "../three/ParticleField";
 
+/* ─── Mouse Follower Glow ─── */
+const CursorGlow: React.FC = () => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 150, damping: 20 });
+  const springY = useSpring(y, { stiffness: 150, damping: 20 });
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      x.set(e.clientX - 200);
+      y.set(e.clientY - 200);
+    };
+    window.addEventListener("mousemove", handler);
+    return () => window.removeEventListener("mousemove", handler);
+  }, [x, y]);
+
+  return (
+    <motion.div
+      className="pointer-events-none fixed z-50 hidden md:block"
+      style={{
+        left: springX,
+        top: springY,
+        width: 400,
+        height: 400,
+        borderRadius: "50%",
+        background:
+          "radial-gradient(circle, rgba(59,130,246,0.07) 0%, rgba(6,182,212,0.04) 40%, transparent 70%)",
+        filter: "blur(30px)",
+      }}
+    />
+  );
+};
+
+/* ─── Orbiting Geometric Shapes ─── */
+const OrbitingShapes: React.FC = () => {
+  const shapes = [
+    { size: 14, delay: 0, duration: 20, radius: 170 },
+    { size: 10, delay: 2, duration: 25, radius: 200 },
+    { size: 8, delay: 4, duration: 18, radius: 150 },
+    { size: 12, delay: 1, duration: 22, radius: 185 },
+    { size: 6, delay: 3, duration: 30, radius: 215 },
+  ];
+
+  const colors = [
+    "rgba(59,130,246,0.7)",
+    "rgba(6,182,212,0.6)",
+    "rgba(96,165,250,0.5)",
+    "rgba(34,211,238,0.6)",
+    "rgba(59,130,246,0.5)",
+  ];
+
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      {shapes.map((shape, i) => (
+        <motion.div
+          key={i}
+          className="absolute left-1/2 top-1/2"
+          style={{ marginLeft: -shape.size / 2, marginTop: -shape.size / 2 }}
+          animate={{ rotate: 360 }}
+          transition={{
+            duration: shape.duration,
+            repeat: Infinity,
+            ease: "linear",
+            delay: shape.delay,
+          }}
+        >
+          <div
+            className="rounded-sm"
+            style={{
+              width: shape.size,
+              height: shape.size,
+              transform: `translateX(${shape.radius}px)`,
+              background: `linear-gradient(135deg, ${colors[i]}, ${colors[(i + 1) % colors.length]})`,
+              boxShadow: `0 0 ${shape.size}px rgba(59,130,246,0.4)`,
+            }}
+          />
+        </motion.div>
+      ))}
+      {/* Orbital rings */}
+      <div
+        className="absolute left-1/2 top-1/2 rounded-full border border-electric/5"
+        style={{ width: 380, height: 380, marginLeft: -190, marginTop: -190 }}
+      />
+      <div
+        className="absolute left-1/2 top-1/2 rounded-full border border-cyan/5"
+        style={{ width: 320, height: 320, marginLeft: -160, marginTop: -160 }}
+      />
+    </div>
+  );
+};
+
+/* ─── Tech Badge ─── */
+const TechBadge: React.FC<{ label: string; delay: number }> = ({ label, delay }) => (
+  <motion.span
+    initial={{ opacity: 0, scale: 0.8, y: 10 }}
+    animate={{ opacity: 1, scale: 1, y: 0 }}
+    transition={{ delay, type: "spring", stiffness: 200 }}
+    className="px-3 py-1.5 rounded-full text-xs font-medium border border-electric/20 bg-electric/5 text-electric-light backdrop-blur-sm hover:border-electric/40 hover:bg-electric/10 transition-all duration-300 cursor-default"
+  >
+    {label}
+  </motion.span>
+);
+
+/* ─── Stats Counter ─── */
+const StatItem: React.FC<{ value: string; label: string; delay: number }> = ({
+  value,
+  label,
+  delay,
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay, duration: 0.5 }}
+    className="text-center"
+  >
+    <div className="text-2xl sm:text-3xl font-bold gradient-text">{value}</div>
+    <div className="text-xs text-grayText mt-1">{label}</div>
+  </motion.div>
+);
+
+/* ─── Main Hero Component ─── */
 const Hero: React.FC = () => {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // 3D tilt values
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), {
+    stiffness: 150,
+    damping: 20,
+  });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), {
+    stiffness: 150,
+    damping: 20,
+  });
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!cardRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      mouseX.set(x);
+      mouseY.set(y);
+    },
+    [mouseX, mouseY]
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    mouseX.set(0);
+    mouseY.set(0);
+  }, [mouseX, mouseY]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+    },
+  };
+
   return (
     <section className="font-mono min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Animated Background */}
+      {/* Cursor glow */}
+      <CursorGlow />
+
+      {/* ── 3D Particle Background ── */}
+      <ParticleField />
+
+      {/* ── Ambient Gradient Orbs ── */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-electric/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-cyan/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <motion.div
+          className="absolute top-1/4 left-1/4 rounded-full"
+          style={{
+            width: 600,
+            height: 600,
+            background: "radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)",
+            filter: "blur(60px)",
+          }}
+          animate={{
+            x: [0, 30, -20, 0],
+            y: [0, -20, 30, 0],
+            scale: [1, 1.1, 0.95, 1],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 rounded-full"
+          style={{
+            width: 500,
+            height: 500,
+            background: "radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%)",
+            filter: "blur(60px)",
+          }}
+          animate={{
+            x: [0, -30, 20, 0],
+            y: [0, 20, -30, 0],
+            scale: [1, 0.95, 1.1, 1],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
       </div>
 
-            {/* bg orbs */}
-      <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
-        <div style={{ position: "absolute", top: "15%", left: "8%", width: "500px", height: "500px", borderRadius: "50%", background: "radial-gradient(circle,rgba(59,130,246,0.12) 0%,transparent 70%)", filter: "blur(40px)" }} />
-        <div style={{ position: "absolute", bottom: "20%", right: "5%", width: "400px", height: "400px", borderRadius: "50%", background: "radial-gradient(circle,rgba(6,182,212,0.1) 0%,transparent 70%)", filter: "blur(40px)" }} />
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "800px", height: "800px", borderRadius: "50%", background: "radial-gradient(circle,rgba(59,130,246,0.04) 0%,transparent 70%)" }} />
-      </div>
-      {/* grid bg */}
-      <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(148,163,184,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,0.04) 1px,transparent 1px)", backgroundSize: "60px 60px", pointerEvents: "none" }} />
- 
-      <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}></div>
+      {/* ── Subtle Grid ── */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30 dark:opacity-20"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(148,163,184,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.05) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
+        }}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          {/* Left Content */}
+      {/* ── Noise Texture Overlay ── */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.015] dark:opacity-[0.03] mix-blend-overlay"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        }}
+      />
+
+      {/* ── Main Content ── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
+          {/* ════════ Left Content ════════ */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex-1 text-center lg:text-left"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex-1 text-center lg:text-left max-w-2xl"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-block px-4 py-2 rounded-full bg-electric/10 text-electric mb-6"
-            >
-              Welcome to my portfolio
+            {/* Status badge */}
+            <motion.div variants={itemVariants} className="mb-8">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-electric/5 border border-electric/15 text-electric-light text-sm font-medium backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                Available for opportunities
+              </span>
             </motion.div>
 
+            {/* Name */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4"
+              variants={itemVariants}
+              className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-3 leading-tight"
+              style={{ fontFamily: "'Syne', sans-serif" }}
             >
               Hi, I'm{" "}
-              <span className="gradient-text">Ronel Melendrez</span>
+              <span className="gradient-text inline-block">Ronel</span>
+              <br />
+              <span className="gradient-text inline-block">Melendrez</span>
             </motion.h1>
 
+            {/* Typed roles */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 text-gray-700 dark:text-gray-300"
+              variants={itemVariants}
+              className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 h-12"
             >
               <TypeAnimation
                 sequence={[
@@ -72,53 +288,179 @@ const Hero: React.FC = () => {
                 wrapper="span"
                 speed={50}
                 repeat={Infinity}
+                className="text-gray-700 dark:text-gray-300"
               />
             </motion.div>
 
+            {/* Description */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="text-grayText dark:text-gray-400 text-lg mb-8 max-w-lg mx-auto lg:mx-0"
+              variants={itemVariants}
+              className="text-grayText text-lg mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
             >
-              I build scalable web applications and create exceptional digital experiences that drive business growth.
+              I build scalable web applications and create exceptional digital
+              experiences that drive business growth.
             </motion.p>
 
+            {/* Tech badges */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8"
+              variants={itemVariants}
+              className="flex flex-wrap gap-2 justify-center lg:justify-start mb-10"
             >
-              <Button variant="primary" onClick={() => window.open("/resume.pdf", "_blank")}>
-                Download Resume
-              </Button>
-              <Button variant="outline" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
-                Contact Me
-              </Button>
+              {["React", "TypeScript", "Node.js", "Tailwind CSS", "Framer Motion"].map(
+                (tech, i) => (
+                  <TechBadge key={tech} label={tech} delay={0.7 + i * 0.05} />
+                )
+              )}
             </motion.div>
 
-            <SocialLinks />
+            {/* Buttons */}
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10"
+            >
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                <Button
+                  variant="primary"
+                  onClick={() => window.open("/resume.pdf", "_blank")}
+                >
+                  ↓ Download Resume
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                <Button
+                  variant="outline"
+                  onClick={() =>
+                    document
+                      .getElementById("contact")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
+                >
+                  Let's Talk →
+                </Button>
+              </motion.div>
+            </motion.div>
+
+            {/* Social links */}
+            <motion.div variants={itemVariants}>
+              <SocialLinks />
+            </motion.div>
+
+            {/* Stats row */}
+            <motion.div
+              variants={itemVariants}
+              className="mt-12 pt-8 border-t border-gray-200/10 grid grid-cols-3 gap-8 max-w-md mx-auto lg:mx-0"
+            >
+              <StatItem value="3+" label="Years Experience" delay={1} />
+              <StatItem value="20+" label="Projects Done" delay={1.1} />
+              <StatItem value="10+" label="Happy Clients" delay={1.2} />
+            </motion.div>
           </motion.div>
 
-          {/* Right Image */}
+          {/* ════════ Right — 3D Profile Card ════════ */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.5, rotateY: 90 }}
-            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-            transition={{ duration: 0.8, type: "spring" }}
-            className="flex-1 flex justify-center"
+            initial={{ opacity: 0, scale: 0.8, x: 80 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 1, type: "spring", stiffness: 80, damping: 15 }}
+            className="flex-1 flex justify-center lg:justify-end"
           >
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-electric to-cyan rounded-full blur-2xl opacity-60 animate-pulse"></div>
-              <img
-                src="src/assets/images/me.png"
-                alt="Ronel Melendrez"
-                className="relative rounded-full w-64 h-64 sm:w-80 sm:h-80 object-cover border-4 border-electric shadow-2xl"
+            <motion.div
+              ref={cardRef}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                rotateX,
+                rotateY,
+                perspective: 1000,
+                transformStyle: "preserve-3d",
+              }}
+              className="relative"
+            >
+              {/* Glow behind */}
+              <motion.div
+                className="absolute -inset-8 rounded-full"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(59,130,246,0.25) 0%, rgba(6,182,212,0.15) 40%, transparent 70%)",
+                  filter: "blur(30px)",
+                }}
+                animate={{ scale: [1, 1.08, 1], opacity: [0.6, 0.9, 0.6] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
-            </div>
+
+              {/* Orbiting shapes */}
+              <OrbitingShapes />
+
+              {/* Image wrapper */}
+              <div className="relative z-10" style={{ transformStyle: "preserve-3d" }}>
+                {/* Gradient border ring */}
+                <div className="relative p-1 rounded-full bg-gradient-to-br from-electric via-cyan to-electric">
+                  <div className="rounded-full bg-navy p-1">
+                    <img
+                      src="src/assets/images/me.png"
+                      alt="Ronel Melendrez"
+                      className="relative rounded-full w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-cover"
+                      style={{ transform: "translateZ(30px)" }}
+                    />
+                  </div>
+                </div>
+
+                {/* Floating glass card — bottom right */}
+                <motion.div
+                  className="absolute -bottom-4 -right-4 px-4 py-3 rounded-2xl glass border border-electric/20"
+                  style={{ transform: "translateZ(50px)" }}
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <span className="text-xs font-medium text-gray-300">
+                      Open to work
+                    </span>
+                  </div>
+                </motion.div>
+
+                {/* Floating glass card — top left */}
+                <motion.div
+                  className="absolute -top-2 -left-6 px-3 py-2 rounded-xl glass border border-cyan/20"
+                  style={{ transform: "translateZ(40px)" }}
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{
+                    duration: 3.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.5,
+                  }}
+                >
+                  <span className="text-xs font-medium text-cyan-light">
+                    ⚡ React · TS
+                  </span>
+                </motion.div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
+
+      {/* ── Scroll Indicator ── */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2 }}
+      >
+        <span className="text-xs text-grayText tracking-widest uppercase">Scroll</span>
+        <motion.div
+          className="w-5 h-8 rounded-full border-2 border-grayText/30 flex justify-center pt-1.5"
+          animate={{ opacity: [0.3, 0.8, 0.3] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <motion.div
+            className="w-1 h-2 rounded-full bg-electric"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
