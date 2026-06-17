@@ -41,11 +41,11 @@ const CursorGlow: React.FC = () => {
 /* ─── Orbiting Geometric Shapes ─── */
 const OrbitingShapes: React.FC = () => {
   const shapes = [
-    { size: 14, delay: 0, duration: 20, radius: 170 },
-    { size: 10, delay: 2, duration: 25, radius: 200 },
-    { size: 8, delay: 4, duration: 18, radius: 150 },
-    { size: 12, delay: 1, duration: 22, radius: 185 },
-    { size: 6, delay: 3, duration: 30, radius: 215 },
+    { size: 14, delay: 0, duration: 20, radius: 130 },
+    { size: 10, delay: 2, duration: 25, radius: 160 },
+    { size: 8, delay: 4, duration: 18, radius: 115 },
+    { size: 12, delay: 1, duration: 22, radius: 145 },
+    { size: 6, delay: 3, duration: 30, radius: 175 },
   ];
 
   const colors = [
@@ -86,11 +86,11 @@ const OrbitingShapes: React.FC = () => {
       {/* Orbital rings */}
       <div
         className="absolute left-1/2 top-1/2 rounded-full border border-electric/5"
-        style={{ width: 380, height: 380, marginLeft: -190, marginTop: -190 }}
+        style={{ width: 300, height: 300, marginLeft: -150, marginTop: -150 }}
       />
       <div
         className="absolute left-1/2 top-1/2 rounded-full border border-cyan/5"
-        style={{ width: 320, height: 320, marginLeft: -160, marginTop: -160 }}
+        style={{ width: 250, height: 250, marginLeft: -125, marginTop: -125 }}
       />
     </div>
   );
@@ -120,7 +120,7 @@ const StatItem: React.FC<{ value: string; label: string; delay: number }> = ({
     transition={{ delay, duration: 0.5 }}
     className="text-center"
   >
-    <div className="text-2xl sm:text-3xl font-bold gradient-text">{value}</div>
+    <div className="text-xl sm:text-2xl font-bold gradient-text">{value}</div>
     <div className="text-xs text-grayText mt-1">{label}</div>
   </motion.div>
 );
@@ -177,7 +177,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="font-mono min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section className="font-mono min-h-screen flex items-center justify-center relative overflow-hidden px-2">
       {/* Cursor glow */}
       <CursorGlow />
 
@@ -237,8 +237,8 @@ const Hero: React.FC = () => {
       />
 
       {/* ── Main Content ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 py-16 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12">
           {/* ════════ Left Content ════════ */}
           <motion.div
             variants={containerVariants}
@@ -260,7 +260,7 @@ const Hero: React.FC = () => {
             {/* Name */}
             <motion.h1
               variants={itemVariants}
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-3 leading-tight"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 leading-tight"
               style={{ fontFamily: "'Syne', sans-serif" }}
             >
               Hi, I'm{" "}
@@ -272,7 +272,7 @@ const Hero: React.FC = () => {
             {/* Typed roles */}
             <motion.div
               variants={itemVariants}
-              className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 h-12"
+              className="text-lg sm:text-xl lg:text-2xl font-semibold mb-5 h-10"
             >
               <TypeAnimation
                 sequence={[
@@ -295,7 +295,7 @@ const Hero: React.FC = () => {
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="text-grayText text-lg mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
+              className="text-grayText text-base sm:text-lg mb-7 max-w-lg mx-auto lg:mx-0 leading-relaxed"
             >
               I build scalable web applications and create exceptional digital
               experiences that drive business growth.
@@ -304,7 +304,7 @@ const Hero: React.FC = () => {
             {/* Tech badges */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap gap-2 justify-center lg:justify-start mb-10"
+              className="flex flex-wrap gap-2 justify-center lg:justify-start mb-8"
             >
               {["React", "TypeScript", "Node.js", "Tailwind CSS", "Framer Motion"].map(
                 (tech, i) => (
@@ -316,7 +316,7 @@ const Hero: React.FC = () => {
             {/* Buttons */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8"
             >
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                 <Button
@@ -348,7 +348,7 @@ const Hero: React.FC = () => {
             {/* Stats row */}
             <motion.div
               variants={itemVariants}
-              className="mt-12 pt-8 border-t border-gray-200/10 grid grid-cols-3 gap-8 max-w-md mx-auto lg:mx-0"
+              className="mt-10 pt-6 border-t border-gray-200/10 grid grid-cols-3 gap-6 max-w-sm mx-auto lg:mx-0"
             >
               <StatItem value="3+" label="Years Experience" delay={1} />
               <StatItem value="20+" label="Projects Done" delay={1.1} />
@@ -377,7 +377,7 @@ const Hero: React.FC = () => {
             >
               {/* Glow behind */}
               <motion.div
-                className="absolute -inset-8 rounded-full"
+                className="absolute -inset-6 rounded-full"
                 style={{
                   background:
                     "radial-gradient(circle, rgba(59,130,246,0.25) 0%, rgba(6,182,212,0.15) 40%, transparent 70%)",
@@ -398,7 +398,7 @@ const Hero: React.FC = () => {
                     <img
                       src="src/assets/images/me.png"
                       alt="Ronel Melendrez"
-                      className="relative rounded-full w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-cover"
+                      className="relative rounded-full w-56 h-56 sm:w-64 sm:h-64 lg:w-80 lg:h-80 object-cover"
                       style={{ transform: "translateZ(30px)" }}
                     />
                   </div>
@@ -406,7 +406,7 @@ const Hero: React.FC = () => {
 
                 {/* Floating glass card — bottom right */}
                 <motion.div
-                  className="absolute -bottom-4 -right-4 px-4 py-3 rounded-2xl glass border border-electric/20"
+                  className="absolute -bottom-4 -right-2 sm:-right-4 px-3 sm:px-4 py-2 sm:py-3 rounded-2xl glass border border-electric/20"
                   style={{ transform: "translateZ(50px)" }}
                   animate={{ y: [0, -8, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -421,7 +421,7 @@ const Hero: React.FC = () => {
 
                 {/* Floating glass card — top left */}
                 <motion.div
-                  className="absolute -top-2 -left-6 px-3 py-2 rounded-xl glass border border-cyan/20"
+                  className="absolute -top-2 -left-4 sm:-left-6 px-3 py-2 rounded-xl glass border border-cyan/20"
                   style={{ transform: "translateZ(40px)" }}
                   animate={{ y: [0, 6, 0] }}
                   transition={{
