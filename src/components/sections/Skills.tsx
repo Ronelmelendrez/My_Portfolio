@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Container from "../common/Container";
 import SectionTitle from "../common/SectionTitle";
@@ -98,11 +98,17 @@ const CircularProgress: React.FC<{ percentage: number; inView: boolean }> = ({
 };
 
 // ------------------------------------------------------------
-// Skills Component – all skills shown in a flat grid
+// Skills Component with Tabs & Flat Grid
 // ------------------------------------------------------------
 const Skills: React.FC = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const allCategories = [...new Set(skills.map((s) => s.category))];
+  const [selectedTab, setSelectedTab] = useState<string>(allCategories[0]);
+
+  const filteredSkills = skills.filter((s) => s.category === selectedTab);
+
+  const groupedSkills = [{ items: filteredSkills }];
 
   return (
     <section className="font-mono py-20 relative overflow-hidden" ref={ref}>
@@ -110,51 +116,79 @@ const Skills: React.FC = () => {
       <Container>
         <SectionTitle title="Skills & Technologies" subtitle="My technical expertise" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skills.map((skill, index) => (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{
-                  delay: index * 0.05,
-                }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="group relative p-6 rounded-xl bg-white dark:bg-navy-light shadow-lg hover:shadow-electric/20 transition-all duration-300 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-electric/0 via-electric/5 to-cyan/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {allCategories.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setSelectedTab(tab)}
+              className={`
+                px-5 py-2 rounded-full font-mono text-sm font-medium
+                transition-all duration-200
+                ${
+                  selectedTab === tab
+                    ? "bg-electric text-navy-dark shadow-lg shadow-electric/30"
+                    : "bg-navy-light/50 text-grayText hover:text-electric border border-electric/20"
+                }
+              `}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
 
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={getLogoUrl(skill.name)}
-                      alt={`${skill.name} logo`}
-                      className="w-8 h-8 object-contain"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = "none";
-                        const fallback = document.createElement("span");
-                        fallback.className = "text-3xl";
-                        fallback.textContent = skill.icon ?? "";
-                        target.parentNode?.insertBefore(fallback, target);
-                      }}
-                    />
-                    <h4 className="text-xl font-semibold">{skill.name}</h4>
-                  </div>
-                  <CircularProgress
-                    percentage={skill.proficiency}
-                    inView={isInView}
-                  />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        <div className="space-y-12">
+          {groupedSkills.map((group, groupIndex) => (
+            <motion.div
+              key={groupIndex}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: groupIndex * 0.1, duration: 0.5 }}
+            >
+              <h3 className="text-2xl font-semibold mb-6 gradient-text">
+                {selectedTab}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {group.items.map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{
+                      delay: groupIndex * 0.1 + index * 0.05,
+                    }}
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    className="group relative p-6 rounded-xl bg-white dark:bg-navy-light shadow-lg hover:shadow-electric/20 transition-all duration-300 overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-electric/0 via-electric/5 to-cyan/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-4">
+                        <img
+                          src={getLogoUrl(skill.name)}
+                          alt={`${skill.name} logo`}
+                          className="w-8 h-8 object-contain"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = "none";
+                            const fallback = document.createElement("span");
+                            fallback.className = "text-3xl";
+                            fallback.textContent = skill.icon ?? "";
+                            target.parentNode?.insertBefore(fallback, target);
+                          }}
+                        />
+                        <h4 className="text-xl font-semibold">{skill.name}</h4>
+                      </div>
+                      <CircularProgress
+                        percentage={skill.proficiency}
+                        inView={isInView}
+                      />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
         {/* Tech Marquee (shows all skills) */}
         <motion.div
