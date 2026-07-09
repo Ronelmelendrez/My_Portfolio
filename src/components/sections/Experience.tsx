@@ -132,7 +132,7 @@ const Experience: React.FC = () => {
 
                   <p
                     className="
-                      mb-5 text-sm text-grayText
+                      mb-5 text-base text-grayText
                       transition-colors duration-500
                       group-hover/card:text-white/80
                     "

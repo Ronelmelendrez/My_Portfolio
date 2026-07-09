@@ -68,7 +68,7 @@ const Contact: React.FC = () => {
                 Contact Info
               </h3>
 
-              <div className="space-y-5 text-sm">
+              <div className="space-y-5 text-base">
                 <div>
                   <p className="text-grayText">📍 Location</p>
                   <p className="text-gray-800 dark:text-gray-200">

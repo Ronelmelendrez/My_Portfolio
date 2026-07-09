@@ -140,7 +140,7 @@ const Projects: React.FC<ProjectsProps> = ({ featured = false }) => {
                       {project.title}
                     </h3>
 
-                    <p className="mb-6 text-sm leading-7 text-grayText dark:text-gray-400">
+                    <p className="mb-6 text-base leading-7 text-grayText dark:text-gray-400">
                       {project.description}
                     </p>
 

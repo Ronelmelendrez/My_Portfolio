@@ -163,7 +163,7 @@ const About: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <h3 className="text-slate-50 font-mono text-xl m-0">
+                  <h3 className="text-slate-50 font-mono text-2xl m-0">
                     Ronel Melendrez
                   </h3>
                   <span className="text-electric font-mono text-sm">
@@ -173,12 +173,12 @@ const About: React.FC = () => {
               </div>
 
               {/* Bio text */}
-              <p className="text-grayText dark:text-gray-400 leading-relaxed mb-5 text-sm font-mono">
+              <p className="text-grayText dark:text-gray-400 leading-relaxed mb-5 text-base font-mono">
                 I'm a student developer and the CTO/Founder of Farm2Home, where I'm building
                 a mobile marketplace for local farm-to-consumer commerce. Through this
                 startup journey, I've gained hands-on experience across the full stack.
               </p>
-              <p className="text-grayText dark:text-gray-400 leading-relaxed mb-8 text-sm font-mono">
+              <p className="text-grayText dark:text-gray-400 leading-relaxed mb-8 text-base font-mono">
                 I work with React/React Native, Express, Typescript, Tailwind CSS, and Supabase to build
                 brand websites, admin dashboards, and our product the mobile app. As a student, I value the
                 intersection of learning and building—creating products that solve real problems while 
@@ -217,7 +217,7 @@ const About: React.FC = () => {
                     {value}
                     {suffix}
                   </div>
-                  <div className="text-grayText dark:text-gray-400 text-sm font-mono">
+                  <div className="text-grayText dark:text-gray-400 text-base font-mono">
                     {label}
                   </div>
                 </InteractiveGlowCard>

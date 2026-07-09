@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative text-gray-700 dark:text-gray-300 hover:text-electric transition-colors ${
+                className={`relative text-base text-gray-700 dark:text-gray-300 hover:text-electric transition-colors ${
                   location.pathname === link.path ? "text-electric" : ""
                 }`}
               >

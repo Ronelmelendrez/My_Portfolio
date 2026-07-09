@@ -100,7 +100,7 @@ const Services: React.FC = () => {
                       {service.title}
                     </h3>
 
-                    <p className="leading-relaxed text-grayText dark:text-gray-400">
+                    <p className="leading-relaxed text-base text-grayText dark:text-gray-400">
                       {service.description}
                     </p>
                   </div>
