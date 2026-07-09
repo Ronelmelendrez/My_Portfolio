@@ -174,16 +174,15 @@ const About: React.FC = () => {
 
               {/* Bio text */}
               <p className="text-grayText dark:text-gray-400 leading-relaxed mb-5 text-sm font-mono">
-                I'm a full‑stack developer with {years}+ years of
-                experience building robust web and mobile applications. My journey in tech
-                started with a curiosity for how things work, which evolved into
-                a career focused on elegant solutions.
+                I'm a student developer and the CTO/Founder of Farm2Home, where I'm building
+                a mobile marketplace for local farm-to-consumer commerce. Through this
+                startup journey, I've gained hands-on experience across the full stack.
               </p>
               <p className="text-grayText dark:text-gray-400 leading-relaxed mb-8 text-sm font-mono">
-                I specialize in modern JavaScript frameworks and cloud
-                technologies, always staying up‑to‑date with industry trends.
-                When I'm not coding, I contribute to open‑source and mentor
-                aspiring developers.
+                I work with React/React Native, Express, Typescript, Tailwind CSS, and Supabase to build
+                brand websites, admin dashboards, and our product the mobile app. As a student, I value the
+                intersection of learning and building—creating products that solve real problems while 
+                continuously improving my craft.
               </p>
 
               {/* Tags */}
