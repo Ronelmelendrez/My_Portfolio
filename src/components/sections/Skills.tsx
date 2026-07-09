@@ -140,7 +140,7 @@ const Skills: React.FC = () => {
                         target.style.display = "none";
                         const fallback = document.createElement("span");
                         fallback.className = "text-3xl";
-                        fallback.textContent = skill.icon;
+                        fallback.textContent = skill.icon ?? "";
                         target.parentNode?.insertBefore(fallback, target);
                       }}
                     />
