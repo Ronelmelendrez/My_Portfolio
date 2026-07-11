@@ -28,17 +28,18 @@
   }
 
   body {
-    @apply font-sans transition-colors duration-300;
+    font-family: 'Inter', system-ui, sans-serif;
+    @apply transition-colors duration-300;
     background: var(--bg);
     color: var(--text);
   }
 
   h1, h2, h3, .display {
-    @apply font-heading;
+    font-family: 'Space Grotesk', sans-serif;
   }
 
   code, .mono, .mono * {
-    @apply font-mono;
+    font-family: 'JetBrains Mono', monospace;
   }
 
   ::selection {
