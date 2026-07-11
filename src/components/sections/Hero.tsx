@@ -339,21 +339,6 @@ const Hero: React.FC = () => {
                 </Button>
               </motion.div>
             </motion.div>
-
-            {/* Social links */}
-            <motion.div variants={itemVariants}>
-              <SocialLinks />
-            </motion.div>
-
-            {/* Stats row */}
-            <motion.div
-              variants={itemVariants}
-              className="mt-10 pt-6 border-t border-gray-200/10 grid grid-cols-3 gap-6 max-w-sm mx-auto lg:mx-0"
-            >
-              <StatItem value="3+" label="Years Experience" delay={1} />
-              <StatItem value="20+" label="Projects Done" delay={1.1} />
-              <StatItem value="10+" label="Happy Clients" delay={1.2} />
-            </motion.div>
           </motion.div>
 
           {/* ════════ Right — 3D Profile Card ════════ */}

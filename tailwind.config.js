@@ -25,6 +25,7 @@ export default {
         },
         slate: {
           DEFAULT: "#1E293B",
+          "2": "#233047",
           light: "#334155",
         },
         electric: {
@@ -35,10 +36,20 @@ export default {
           DEFAULT: "#06B6D4",
           light: "#22D3EE",
         },
+        amber: {
+          DEFAULT: "#F59E0B",
+          light: "#FBBF24",
+        },
         grayText: "#64748B",
+        surface: "rgba(30,41,59,0.55)",
+        "surface-light": "rgba(255,255,255,0.65)",
+        "border-dark": "rgba(148,163,184,0.14)",
+        "border-light": "rgba(15,23,42,0.10)",
       },
 
       fontFamily: {
+         sans: ['"Inter"', 'system-ui', 'sans-serif'],
+         heading: ['"Space Grotesk"', 'sans-serif'],
          mono: ['"JetBrains Mono"', 'monospace'],
       },
 

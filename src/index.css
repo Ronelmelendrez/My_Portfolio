@@ -1,16 +1,48 @@
- @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg: #F8FAFC;
+    --bg-elev: #FFFFFF;
+    --text: #0F172A;
+    --text-dim: #52627a;
+    --border: rgba(15,23,42,0.10);
+    --surface: rgba(255,255,255,0.65);
+  }
+
+  .dark {
+    --bg: #0F172A;
+    --bg-elev: #1E293B;
+    --text: #E7ECF5;
+    --text-dim: #94A3B8;
+    --border: rgba(148,163,184,0.14);
+    --surface: rgba(30,41,59,0.55);
+  }
+
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-gray-50 dark:bg-navy text-gray-900 dark:text-white transition-colors duration-300;
+    @apply font-sans transition-colors duration-300;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  h1, h2, h3, .display {
+    @apply font-heading;
+  }
+
+  code, .mono, .mono * {
+    @apply font-mono;
+  }
+
+  ::selection {
+    @apply bg-electric text-white;
   }
 
   ::-webkit-scrollbar {
@@ -18,7 +50,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-gray-200 dark:bg-slate;
+    background: var(--bg-elev);
   }
 
   ::-webkit-scrollbar-thumb {
@@ -28,10 +60,45 @@
 
 @layer components {
   .glass {
-    @apply bg-white/10 dark:bg-navy-light/30 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-xl;
+    background: var(--surface);
+    @apply backdrop-blur-md border shadow-xl;
+    border-color: var(--border);
   }
 
   .gradient-text {
     @apply bg-gradient-to-r from-electric to-cyan bg-clip-text text-transparent bg-200% animate-gradient;
+  }
+
+  .bg-atmos {
+    @apply fixed inset-0 -z-20 overflow-hidden pointer-events-none;
+  }
+
+  .bg-atmos::before {
+    content: '';
+    @apply absolute inset-0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+
+  .glow-orb {
+    @apply absolute rounded-full;
+    filter: blur(90px);
+    opacity: 0.35;
+  }
+
+  .glow-1 {
+    @apply w-[520px] h-[520px] bg-electric;
+    top: -180px;
+    left: -120px;
+  }
+
+  .glow-2 {
+    @apply w-[460px] h-[460px] bg-cyan;
+    top: 280px;
+    right: -160px;
+    opacity: 0.22;
   }
 }
