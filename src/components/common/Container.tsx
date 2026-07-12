@@ -1,24 +1,5 @@
-import React from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
+import type { ReactNode } from 'react';
 
-interface ContainerProps extends HTMLMotionProps<"div"> {
-  children: React.ReactNode;
-  className?: string;
+export default function Container({ children, className = '' }: { children: ReactNode; className?: string }) {
+  return <div className={`mx-auto max-w-[1180px] px-6 ${className}`}>{children}</div>;
 }
-
-const Container: React.FC<ContainerProps> = ({ children, className = "", ...props }) => {
-  return (
-    <motion.div
-      className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6 }}
-      {...props}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-export default Container;
