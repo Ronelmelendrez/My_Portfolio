@@ -1,40 +1,49 @@
-import React from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
+import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
 
-interface ButtonProps extends HTMLMotionProps<"button"> {
-  variant?: "primary" | "secondary" | "outline";
-  children: React.ReactNode;
+const buttonVariants = cva(
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[10px] text-sm font-semibold transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+  {
+    variants: {
+      variant: {
+        default:
+          'bg-gradient-to-br from-primary to-accent text-primary-foreground shadow-[0_8px_24px_-8px_rgba(59,130,246,0.6)] hover:-translate-y-0.5 hover:shadow-[0_12px_28px_-8px_rgba(59,130,246,0.75)]',
+        outline:
+          'border border-border bg-[var(--surface)] text-foreground hover:border-primary hover:text-primary',
+        ghost: 'text-muted-foreground hover:bg-[var(--surface)] hover:text-foreground',
+        link: 'text-primary underline-offset-4 hover:underline',
+        destructive: 'bg-destructive text-destructive-foreground hover:opacity-90',
+      },
+      size: {
+        default: 'h-11 px-[22px] py-3',
+        sm: 'h-9 rounded-lg px-4 text-[13px]',
+        lg: 'h-12 rounded-xl px-8 text-base',
+        icon: 'h-9 w-9 rounded-[10px]',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
+  },
+);
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  variant = "primary",
-  children,
-  className = "",
-  ...props
-}) => {
-  const baseStyles =
-    "px-6 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center justify-center gap-2 cursor-pointer";
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button';
+    return (
+      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+    );
+  },
+);
+Button.displayName = 'Button';
 
-  const variants = {
-    primary:
-      "bg-gradient-to-r from-electric to-cyan text-white hover:shadow-lg hover:shadow-electric/30 hover:scale-105",
-    secondary:
-      "bg-navy-light text-white hover:bg-electric/80 hover:scale-105",
-    outline:
-      "border-2 border-electric text-electric hover:bg-electric hover:text-white hover:scale-105",
-  };
-
-  return (
-    <motion.button
-      className={`${baseStyles} ${variants[variant]} ${className}`}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ type: "spring", stiffness: 300 }}
-      {...props}
-    >
-      {children}
-    </motion.button>
-  );
-};
-
-export default Button;
+export { Button, buttonVariants };
