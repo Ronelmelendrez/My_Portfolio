@@ -18,6 +18,29 @@
   --text: #e7ecf5;
   --text-dim: #94a3b8;
   --surface: rgba(30, 41, 59, 0.55);
+
+  /* shadcn/ui semantic tokens, aliased onto the tokens above so theme
+     switching (data-theme="light") keeps working without duplication */
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--bg-elev);
+  --card-foreground: var(--text);
+  --popover: var(--bg-elev);
+  --popover-foreground: var(--text);
+  --primary: var(--blue);
+  --primary-foreground: #ffffff;
+  --secondary: var(--slate-2);
+  --secondary-foreground: var(--text);
+  --muted: var(--surface);
+  --muted-foreground: var(--text-dim);
+  --accent: var(--cyan);
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: var(--border-dark);
+  --input: var(--border-dark);
+  --ring: var(--cyan);
+  --radius: 0.85rem;
 }
 
 html[data-theme='light'] {
@@ -298,20 +321,6 @@ body {
     color: var(--cyan);
     letter-spacing: 0.08em;
   }
-  .chip {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    padding: 6px 11px;
-    border-radius: 8px;
-    border: 1px solid var(--border-dark);
-    color: var(--text-dim);
-    background: rgba(0, 0, 0, 0.08);
-    transition: 0.2s;
-  }
-  .layer:hover .chip {
-    color: var(--text);
-    border-color: rgba(6, 182, 212, 0.3);
-  }
 
   .marquee-wrap {
     border-top: 1px solid var(--border-dark);
@@ -356,11 +365,7 @@ body {
     align-items: flex-start;
     gap: 18px;
     padding: 22px 24px;
-    border-bottom: 1px solid var(--border-dark);
     transition: 0.25s;
-  }
-  .cert-item:last-child {
-    border-bottom: none;
   }
   .cert-item:hover {
     background: rgba(59, 130, 246, 0.06);
@@ -392,16 +397,6 @@ body {
   }
   .cert-name .ver {
     color: var(--amber);
-  }
-  .cert-verified-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    letter-spacing: 0.06em;
-    color: #22c55e;
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    padding: 3px 8px;
-    border-radius: 6px;
   }
   .cert-foot a:hover {
     color: var(--cyan);
@@ -487,19 +482,6 @@ body {
   }
 
   /* testimonials */
-  .avatar {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--blue), var(--cyan));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-family: 'Space Grotesk', sans-serif;
-    color: white;
-    font-size: 14px;
-  }
   .testi-dot {
     width: 7px;
     height: 7px;
@@ -512,30 +494,6 @@ body {
     background: var(--cyan);
     width: 20px;
     border-radius: 4px;
-  }
-
-  /* contact */
-  .field-input {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--border-dark);
-    border-radius: 10px;
-    padding: 13px 15px;
-    color: var(--text);
-    font-size: 14px;
-    transition: 0.2s;
-    outline: none;
-  }
-  .field-input:focus {
-    border-color: var(--cyan);
-    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
-  }
-  .field-label {
-    display: block;
-    font-size: 12.5px;
-    color: var(--text-dim);
-    margin-bottom: 8px;
-    font-family: 'JetBrains Mono', monospace;
   }
 
   #backtotop-btn {
