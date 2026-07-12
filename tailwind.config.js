@@ -1,93 +1,87 @@
+import tailwindcssAnimate from 'tailwindcss-animate';
+
+/** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: "class",
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: ['selector', '[data-theme="light"]'],
   theme: {
-    fontSize: {
-      xs: ["0.8125rem", { lineHeight: "1.25rem" }], // 13px
-      sm: ["0.9375rem", { lineHeight: "1.5rem" }], // 15px
-      base: ["1.0625rem", { lineHeight: "1.75rem" }], // 17px
-      lg: ["1.1875rem", { lineHeight: "1.75rem" }], // 19px
-      xl: ["1.375rem", { lineHeight: "1.75rem" }], // 22px
-      "2xl": ["1.625rem", { lineHeight: "2rem" }], // 26px
-      "3xl": ["2rem", { lineHeight: "2.25rem" }], // 32px
-      "4xl": ["2.5rem", { lineHeight: "2.75rem" }], // 40px
-      "5xl": ["3.25rem", { lineHeight: "1" }], // 52px
-      "6xl": ["4rem", { lineHeight: "1" }], // 64px
-      "7xl": ["4.75rem", { lineHeight: "1" }], // 76px
-      "8xl": ["5.5rem", { lineHeight: "1" }], // 88px
-      "9xl": ["6.5rem", { lineHeight: "1" }], // 104px
-    },
     extend: {
       colors: {
-        navy: {
-          DEFAULT: "#0F172A",
-          light: "#1E293B",
-        },
+        navy: '#0F172A',
         slate: {
-          DEFAULT: "#1E293B",
-          "2": "#233047",
-          light: "#334155",
+          DEFAULT: '#1E293B',
+          2: '#233047',
         },
-        electric: {
-          DEFAULT: "#3B82F6",
-          light: "#60A5FA",
-        },
-        cyan: {
-          DEFAULT: "#06B6D4",
-          light: "#22D3EE",
-        },
-        amber: {
-          DEFAULT: "#F59E0B",
-          light: "#FBBF24",
-        },
-        grayText: "#64748B",
-        surface: "rgba(30,41,59,0.55)",
-        "surface-light": "rgba(255,255,255,0.65)",
-        "border-dark": "rgba(148,163,184,0.14)",
-        "border-light": "rgba(15,23,42,0.10)",
-      },
+        blue: '#3B82F6',
+        cyan: '#06B6D4',
+        amber: '#F59E0B',
+        graytext: '#64748B',
+        surfacegray: '#F8FAFC',
 
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        border: 'var(--border)',
+        input: 'var(--input)',
+        ring: 'var(--ring)',
+        card: {
+          DEFAULT: 'var(--card)',
+          foreground: 'var(--card-foreground)',
+        },
+        popover: {
+          DEFAULT: 'var(--popover)',
+          foreground: 'var(--popover-foreground)',
+        },
+        primary: {
+          DEFAULT: 'var(--primary)',
+          foreground: 'var(--primary-foreground)',
+        },
+        secondary: {
+          DEFAULT: 'var(--secondary)',
+          foreground: 'var(--secondary-foreground)',
+        },
+        muted: {
+          DEFAULT: 'var(--muted)',
+          foreground: 'var(--muted-foreground)',
+        },
+        accent: {
+          DEFAULT: 'var(--accent)',
+          foreground: 'var(--accent-foreground)',
+        },
+        destructive: {
+          DEFAULT: 'var(--destructive)',
+          foreground: 'var(--destructive-foreground)',
+        },
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
       fontFamily: {
-         sans: ['"Inter"', 'system-ui', 'sans-serif'],
-         heading: ['"Space Grotesk"', 'sans-serif'],
-         mono: ['"JetBrains Mono"', 'monospace'],
+        display: ['"Space Grotesk"', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
-
-      animation: {
-        "spin-slow": "spin 20s linear infinite",
-        float: "float 6s ease-in-out infinite",
-        gradient: "gradient 8s ease infinite",
-
-        // Add this
-        marquee: "marquee 20s linear infinite",
-      },
-
       keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-20px)" },
+        'pulse-live': {
+          '0%': { boxShadow: '0 0 0 0 rgba(34,197,94,.5)' },
+          '70%': { boxShadow: '0 0 0 8px rgba(34,197,94,0)' },
+          '100%': { boxShadow: '0 0 0 0 rgba(34,197,94,0)' },
         },
-
-        gradient: {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
+        blink: {
+          '50%': { opacity: 0 },
         },
-
-        // Add this
-        marquee: {
-          "0%": {
-            transform: "translateX(0)",
-          },
-          "100%": {
-            transform: "translateX(-50%)",
-          },
+        'scroll-x': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
         },
       },
-
-      backgroundSize: {
-        "200%": "200% 200%",
+      animation: {
+        'pulse-live': 'pulse-live 2s infinite',
+        blink: 'blink 1s step-start infinite',
+        marquee: 'scroll-x 26s linear infinite',
       },
     },
   },
-  plugins: [],
+  plugins: [tailwindcssAnimate],
 };
