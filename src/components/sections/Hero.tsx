@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback, useRef } from "react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import Button from "../common/Button";
+import Button from "../ui/Button";
 import SocialLinks from "../common/SocialLinks";
 import { TypeAnimation } from "react-type-animation";
 import ParticleField from "../three/ParticleField";
