@@ -1,239 +1,57 @@
-import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
-import Container from "../common/Container";
-import SectionTitle from "../common/SectionTitle";
-import { skills } from "../../data/skills";
+import Reveal from '../common/Reveal';
+import Container from '../common/Container';
+import SectionTitle from '../common/SectionTitle';
+import { Badge } from '@/components/ui/badge';
+import { skillLayers, marqueeStack } from '@/data/skills';
 
-// ------------------------------------------------------------
-// Helper: Get official logo URL (Simple Icons CDN)
-// ------------------------------------------------------------
-const getLogoUrl = (skillName: string): string => {
-  const slugMap: Record<string, string> = {
-    React: "react",
-    TypeScript: "typescript",
-    JavaScript: "javascript",
-    "Node.js": "nodedotjs",
-    Python: "python",
-    Java: "java",
-    "C#": "csharp",
-    PHP: "php",
-    HTML5: "html5",
-    CSS3: "css3",
-    "Tailwind CSS": "tailwindcss",
-    Bootstrap: "bootstrap",
-    Sass: "sass",
-    Git: "git",
-    GitHub: "github",
-    GitLab: "gitlab",
-    Docker: "docker",
-    Kubernetes: "kubernetes",
-    "Express.js": "express", 
-    PostgreSQL: "postgresql",
-    MySQL: "mysql",
-    Figma: "figma",
-    "Vue.js": "vuedotjs",
-    "Next.js": "nextdotjs",
-    Express: "express",
-    Supabase: "supabase",
-    Render: "render",
-    "React Native": "react",
-  };
-  const slug = slugMap[skillName] || "code";
-  return `https://cdn.simpleicons.org/${slug}/00ffff`; // electric colour
-};
-
-// ------------------------------------------------------------
-// Circular Progress Component
-// ------------------------------------------------------------
-const CircularProgress: React.FC<{ percentage: number; inView: boolean }> = ({
-  percentage,
-  inView,
-}) => {
-  const size = 70;
-  const strokeWidth = 6;
-  const radius = (size - strokeWidth) / 2;
-  const circumference = 2 * Math.PI * radius;
-  const dashOffset = inView
-    ? circumference * (1 - percentage / 100)
-    : circumference;
-  const gradientId = `progress-grad-${percentage}`;
-
+export default function Skills() {
   return (
-    <div className="relative inline-flex items-center justify-center">
-      <svg width={size} height={size} className="transform -rotate-90">
-        <defs>
-          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#00ffff" />
-            <stop offset="100%" stopColor="#00e5ff" />
-          </linearGradient>
-        </defs>
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          fill="none"
-          stroke="#e2e8f0"
-          strokeWidth={strokeWidth}
-          className="dark:stroke-gray-700"
-        />
-        <motion.circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          fill="none"
-          stroke={`url(#${gradientId})`}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          initial={{ strokeDashoffset: circumference }}
-          animate={{ strokeDashoffset: dashOffset }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        />
-      </svg>
-      <span className="absolute text-sm font-mono font-semibold text-electric">
-        {percentage}%
-      </span>
-    </div>
-  );
-};
-
-// ------------------------------------------------------------
-// Skills Component with Tabs & Flat Grid
-// ------------------------------------------------------------
-const Skills: React.FC = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-  const allCategories = [...new Set(skills.map((s) => s.category))];
-  const [selectedTab, setSelectedTab] = useState<string>(allCategories[0]);
-
-  const filteredSkills = skills.filter((s) => s.category === selectedTab);
-
-  const groupedSkills = [{ items: filteredSkills }];
-
-  return (
-    <section className="font-mono py-20 relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 bg-gradient-to-br from-electric/5 via-transparent to-cyan/5 pointer-events-none"></div>
+    <section id="skills" className="py-[120px]">
       <Container>
-        <SectionTitle title="Skills & Technologies" subtitle="My technical expertise" />
+        <Reveal>
+          <SectionTitle
+            eyebrow="SKILLS"
+            title="How a request becomes a running system."
+            subtitle="Every layer below is one I've shipped to production — top to bottom, not just top-of-resume."
+          />
+        </Reveal>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {allCategories.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setSelectedTab(tab)}
-              className={`
-                px-5 py-2 rounded-full font-mono text-sm font-medium
-                transition-all duration-200
-                ${
-                  selectedTab === tab
-                    ? "bg-electric text-navy-dark shadow-lg shadow-electric/30"
-                    : "bg-navy-light/50 text-grayText hover:text-electric border border-electric/20"
-                }
-              `}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-
-        <div className="space-y-12">
-          {groupedSkills.map((group, groupIndex) => (
-            <motion.div
-              key={groupIndex}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: groupIndex * 0.1, duration: 0.5 }}
-            >
-              <h3 className="text-2xl font-semibold mb-6 gradient-text">
-                {selectedTab}
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {group.items.map((skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{
-                      delay: groupIndex * 0.1 + index * 0.05,
-                    }}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    className="group relative p-6 rounded-xl bg-white dark:bg-navy-light shadow-lg hover:shadow-electric/20 transition-all duration-300 overflow-hidden"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-electric/0 via-electric/5 to-cyan/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-center gap-4">
-                        <img
-                          src={getLogoUrl(skill.name)}
-                          alt={`${skill.name} logo`}
-                          className="w-8 h-8 object-contain"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = "none";
-                            const fallback = document.createElement("span");
-                            fallback.className = "text-3xl";
-                            fallback.textContent = skill.icon ?? "";
-                            target.parentNode?.insertBefore(fallback, target);
-                          }}
-                        />
-                        <h4 className="text-xl font-semibold">{skill.name}</h4>
-                      </div>
-                      <CircularProgress
-                        percentage={skill.proficiency}
-                        inView={isInView}
-                      />
-                    </div>
-                  </motion.div>
-                ))}
+        <div className="mt-14 flex flex-col gap-3.5">
+          {skillLayers.map((layer, i) => (
+            <Reveal key={layer.title} delay={i * 0.05}>
+              <div className="layer group">
+                <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+                  <span className="font-display text-lg font-semibold">{layer.title}</span>
+                  <span className="layer-label">{layer.label}</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {layer.items.map((item) => (
+                    <Badge
+                      key={item}
+                      variant="chip"
+                      className="group-hover:border-accent/30 group-hover:text-foreground"
+                    >
+                      {item}
+                    </Badge>
+                  ))}
+                </div>
               </div>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
 
-        {/* Tech Marquee (shows all skills) */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.8 }}
-          className="mt-16 overflow-hidden"
-        >
-          <div className="flex w-max gap-8 whitespace-nowrap animate-marquee hover:[animation-play-state:paused]">
-            {[...Array(2)].map((_, ri) =>
-              skills.map((skill) => (
-                <span
-                  key={`${ri}-${skill.name}`}
-                  className="
-                    flex-shrink-0
-                    inline-flex
-                    items-center
-                    gap-2
-                    rounded-lg
-                    border border-slate-700/20
-                    bg-slate-800/60
-                    px-4 py-2
-                    text-sm
-                    font-mono
-                    text-slate-400
-                    backdrop-blur-sm
-                  "
-                >
-                  <img
-                    src={getLogoUrl(skill.name)}
-                    alt=""
-                    className="w-5 h-5 object-contain"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = "none";
-                    }}
-                  />
-                  {skill.name}
+        <Reveal delay={0.2}>
+          <div className="marquee-wrap mt-14">
+            <div className="marquee-track animate-marquee">
+              {[...marqueeStack, ...marqueeStack].map((item, i) => (
+                <span key={i}>
+                  <b>◆</b> {item}
                 </span>
-              ))
-            )}
+              ))}
+            </div>
           </div>
-        </motion.div>
+        </Reveal>
       </Container>
     </section>
   );
-};
-
-export default Skills;
+}
