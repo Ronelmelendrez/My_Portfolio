@@ -28,26 +28,27 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom links and social */}
+        {/* Bottom section */}
         <div className="flex flex-col mt-16">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0 mb-12">
             {/* Brand */}
-            <div className="order-2 md:order-1">
+            <div>
               <h3 className="text-2xl font-bold font-display tracking-tight">Ronel Melendrez</h3>
               <p className="text-dim text-sm font-mono mt-1">Full Stack Developer</p>
             </div>
 
+            {/* Copyright */}
+            <p className="text-dim font-mono text-sm">
+              Copyright © {currentYear} Ronel Melendrez. All rights reserved.
+            </p>
+
             {/* Social Links */}
-            <div className="order-3">
+            <div>
               <SocialLinks />
             </div>
           </div>
 
           <hr className="border-border" />
-
-          <p className="w-full text-center mt-12 text-dim font-mono text-sm">
-            Copyright © {currentYear} Ronel Melendrez. All rights reserved.
-          </p>
         </div>
       </div>
     </footer>
