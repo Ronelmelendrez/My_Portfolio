@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import SocialLinks from "../common/SocialLinks";
 
-const navLinks = [
-  { path: "/", label: "Home" },
-  { path: "/projects", label: "Projects" },
-  { path: "/contact", label: "Contact" },
+const NAV_ITEMS = [
+  { href: '#about', label: 'About' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#certificates', label: 'Certificates' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#services', label: 'Services' },
+  { href: '#contact', label: 'Contact' },
 ];
 
 const Footer = () => {
@@ -45,10 +48,10 @@ const Footer = () => {
 
             {/* Navigation links */}
             <div className="flex flex-row space-x-8 order-1 md:order-2">
-              {navLinks.map((link) => (
+              {NAV_ITEMS.map((link) => (
                 <Link
-                  key={link.path}
-                  to={link.path}
+                  key={link.href}
+                  to={link.href}
                   className="nav-link uppercase"
                 >
                   {link.label}
