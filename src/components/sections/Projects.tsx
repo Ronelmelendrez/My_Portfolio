@@ -6,7 +6,11 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { projects } from '@/data/projects';
 
-export default function Projects() {
+interface ProjectsProps {
+  featured?: boolean;
+}
+
+export default function Projects({ featured: _featured }: ProjectsProps) {
   return (
     <section id="projects" className="py-[120px]">
       <Container>

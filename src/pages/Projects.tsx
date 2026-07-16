@@ -15,8 +15,8 @@ const ProjectsPage: React.FC = () => {
       <section className="font-mono pt-20 pb-10 bg-gradient-to-b from-electric/5 to-transparent">
         <Container>
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">All Projects</h1>
-            <p className="text-grayText text-lg max-w-2xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 grad-text">All Projects</h1>
+            <p className="text-graytext text-lg max-w-2xl mx-auto">
               Explore my complete portfolio of web applications and software solutions
             </p>
           </div>

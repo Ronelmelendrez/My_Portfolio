@@ -35,15 +35,15 @@ export default function Testimonials() {
               >
                 <div className="mb-4 text-[15px] tracking-widest text-amber">★★★★★</div>
                 <p className="font-display text-[19px] font-medium leading-relaxed">
-                  "{current.quote}"
+                  "{current.message}"
                 </p>
                 <div className="mt-6 flex items-center justify-center gap-3">
                   <Avatar>
-                    <AvatarFallback>{current.initials}</AvatarFallback>
+                    <AvatarFallback>{current.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                   </Avatar>
                   <div className="text-left">
                     <div className="text-[14px] font-semibold">{current.name}</div>
-                    <div className="text-dim text-[12.5px]">{current.company}</div>
+                    <div className="text-dim text-[12.5px]">{current.role} at {current.company}</div>
                   </div>
                 </div>
               </motion.div>

@@ -15,6 +15,8 @@ export default {
         blue: '#3B82F6',
         cyan: '#06B6D4',
         amber: '#F59E0B',
+        electric: '#3B82F6',
+        'electric-light': '#2563EB',
         graytext: '#64748B',
         surfacegray: '#F8FAFC',
 

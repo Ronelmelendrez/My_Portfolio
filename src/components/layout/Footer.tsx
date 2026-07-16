@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="font-mono w-full  bg-white/80 dark:bg-navy-light/80 text-gray-900 dark:text-white border-t border-gray-200 dark:border-white/10 mt-12">
+    <footer className="font-mono w-full  bg-white/80 dark:bg-navy/80 text-gray-900 dark:text-white border-t border-gray-200 dark:border-white/10 mt-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Top CTA section */}
         <div className="w-full text-5xl md:text-7xl font-bold">
@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="flex mt-8 flex-col md:flex-row md:justify-between items-start">
-          <p className="w-full md:w-2/3 text-grayText text-base">
+          <p className="w-full md:w-2/3 text-graytext text-base">
             I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
           </p>
           <div className="w-44 pt-6 md:pt-0">
@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
             {/* Brand */}
             <div className="order-2 md:order-1">
               <h3 className="text-2xl font-bold tracking-tight">Ronel Melendrez</h3>
-              <p className="text-grayText text-sm mt-1">Full Stack Developer</p>
+              <p className="text-graytext text-sm mt-1">Full Stack Developer</p>
             </div>
 
             {/* Navigation links */}
@@ -66,7 +66,7 @@ const Footer: React.FC = () => {
 
           <hr className="border-gray-200 dark:border-white/10" />
 
-          <p className="w-full text-center mt-12 text-grayText">
+          <p className="w-full text-center mt-12 text-graytext">
             Copyright © {currentYear} Ronel Melendrez. All rights reserved.
           </p>
         </div>

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 const ScrollProgress: React.FC = () => {
