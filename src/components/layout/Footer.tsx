@@ -6,7 +6,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full border-t border-border bg-card text-card-foreground mt-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
         {/* Top CTA section */}
         <div className="w-full text-5xl md:text-7xl font-bold font-display">
           <h1 className="w-full md:w-2/3 leading-tight">
@@ -28,9 +28,10 @@ const Footer = () => {
           </div>
         </div>
 
+        <hr className="border-border mt-8" />
         {/* Bottom section */}
-        <div className="flex flex-col mt-16">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0 mb-12">
+        <div className="flex flex-col mt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0 mb-5">
             {/* Brand */}
             <div>
               <h3 className="text-2xl font-bold font-display tracking-tight">Ronel Melendrez</h3>
@@ -47,8 +48,6 @@ const Footer = () => {
               <SocialLinks />
             </div>
           </div>
-
-          <hr className="border-border" />
         </div>
       </div>
     </footer>
