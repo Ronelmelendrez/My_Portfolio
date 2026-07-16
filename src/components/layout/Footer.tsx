@@ -11,7 +11,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full border-t border-border bg-background text-foreground mt-12">
+    <footer className="w-full border-t border-border bg-card text-card-foreground mt-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Top CTA section */}
         <div className="w-full text-5xl md:text-7xl font-bold font-display">
