@@ -22,7 +22,7 @@ export default function Hero() {
           </h1>
 
           <p className="text-dim mb-8 max-w-[480px] text-[17px] leading-relaxed">
-            I'm Alex Rivera, a full-stack developer who turns ambiguous product ideas into fast,
+            I'm Ronel Melendrez, a full-stack developer who turns ambiguous product ideas into fast,
             reliable systems — from the database schema to the pixel on screen.
           </p>
 

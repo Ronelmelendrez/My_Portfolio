@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 
 const infoItems = [
-  { icon: FiMail, title: 'Email', value: 'hello@alexrivera.dev' },
+  { icon: FiMail, title: 'Email', value: 'hello@ronel.dev' },
   { icon: FiPhone, title: 'Phone', value: '+1 (415) 555-0148' },
   { icon: FiMapPin, title: 'Location', value: 'San Francisco, CA — remote friendly' },
 ];

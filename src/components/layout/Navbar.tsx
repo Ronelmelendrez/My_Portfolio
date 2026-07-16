@@ -25,7 +25,7 @@ export default function Navbar({ activeSection, theme, onToggleTheme }: NavbarPr
     <nav className="nav-blur fixed inset-x-0 top-0 z-[100]">
       <Container className="flex h-[68px] items-center justify-between">
         <a href="#home" className="font-mono text-[17px] font-semibold tracking-tight">
-          <span className="text-blue">&lt;</span>Alex<span className="text-blue">/&gt;</span>
+          <span className="text-blue">&lt;</span>Ronel<span className="text-blue">/&gt;</span>
         </a>
 
         <div
