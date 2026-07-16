@@ -1,8 +1,7 @@
 import Reveal from '../common/Reveal';
-import Counter from '../common/Counter';
 import Container from '../common/Container';
 import SectionTitle from '../common/SectionTitle';
-import { Card, CardContent } from '@/components/ui/card';
+import meImage from '@/assets/images/me.png';
 
 export default function About() {
   return (
@@ -26,27 +25,22 @@ export default function About() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-            <Card className="stat-card">
-              <CardContent className="p-0">
-                <Counter target={7} className="text-[32px]" />
-                <span className="text-dim text-[13px]">Years building production software</span>
-              </CardContent>
-            </Card>
-            <Card className="stat-card">
-              <CardContent className="p-0">
-                <Counter target={48} className="text-[32px]" />
-                <span className="text-dim text-[13px]">Projects launched end-to-end</span>
-              </CardContent>
-            </Card>
-            <Card className="stat-card">
-              <CardContent className="p-0">
-                <Counter target={26} className="text-[32px]" />
-                <span className="text-dim text-[13px]">Clients who came back for round two</span>
-              </CardContent>
-            </Card>
-          </div>
-        </Reveal>
+  <div className="flex justify-center">
+    <div className="relative p-3">
+      {/* Glow */}
+      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-accent to-primary opacity-40 blur-2xl" />
+
+      {/* Image */}
+      <div className="relative h-72 w-72 md:h-80 md:w-80 lg:h-96 lg:w-96 overflow-hidden rounded-full border border-border bg-card">
+        <img
+          src={meImage}
+          alt="Ronel Melendrez"
+          className="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  </div>
+</Reveal>
       </Container>
     </section>
   );
