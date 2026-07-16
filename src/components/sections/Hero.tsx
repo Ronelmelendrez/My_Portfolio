@@ -1,20 +1,14 @@
 import { motion } from 'framer-motion';
 import Container from '../common/Container';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import Counter from '../common/Counter';
 import TypedCode from './TypedCode';
 
 export default function Hero() {
   return (
-    <section id="home" className="flex min-h-screen items-center pt-[110px]">
+    <section id="home" className="flex min-h-screen items-center pt-[5px]">
       <Container className="grid grid-cols-1 items-center gap-14 md:grid-cols-[1.05fr_0.95fr]">
         <div>
-          <Badge variant="pill" className="mb-5">
-            <span className="mr-2 h-[7px] w-[7px] animate-pulse-live rounded-full bg-green-500" />
-            AVAILABLE FOR NEW PROJECTS
-          </Badge>
-
           <h1 className="mb-5 font-display text-[clamp(38px,5.4vw,60px)] font-bold leading-[1.08] tracking-tight">
             Building software
             <br />
