@@ -1,5 +1,3 @@
-// src/components/layout/Footer.tsx
-import React from "react";
 import { Link } from "react-router-dom";
 import SocialLinks from "../common/SocialLinks";
 
@@ -9,27 +7,27 @@ const navLinks = [
   { path: "/contact", label: "Contact" },
 ];
 
-const Footer: React.FC = () => {
+const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="font-mono w-full  bg-white/80 dark:bg-navy/80 text-gray-900 dark:text-white border-t border-gray-200 dark:border-white/10 mt-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <footer className="w-full border-t border-border bg-background text-foreground mt-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Top CTA section */}
-        <div className="w-full text-5xl md:text-7xl font-bold">
+        <div className="w-full text-5xl md:text-7xl font-bold font-display">
           <h1 className="w-full md:w-2/3 leading-tight">
             How can we help you. get in touch
           </h1>
         </div>
 
         <div className="flex mt-8 flex-col md:flex-row md:justify-between items-start">
-          <p className="w-full md:w-2/3 text-graytext text-base">
+          <p className="w-full md:w-2/3 text-dim text-base">
             I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
           </p>
           <div className="w-44 pt-6 md:pt-0">
             <Link
               to="/contact"
-              className="bg-electric justify-center text-center rounded-lg shadow px-10 py-3 flex items-center hover:bg-electric-light transition-colors text-white"
+              className="btn btn-primary justify-center text-center rounded-lg px-10 py-3 flex items-center"
             >
               Contact Us
             </Link>
@@ -41,8 +39,8 @@ const Footer: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0 mb-12">
             {/* Brand */}
             <div className="order-2 md:order-1">
-              <h3 className="text-2xl font-bold tracking-tight">Ronel Melendrez</h3>
-              <p className="text-graytext text-sm mt-1">Full Stack Developer</p>
+              <h3 className="text-2xl font-bold font-display tracking-tight">Ronel Melendrez</h3>
+              <p className="text-dim text-sm font-mono mt-1">Full Stack Developer</p>
             </div>
 
             {/* Navigation links */}
@@ -51,7 +49,7 @@ const Footer: React.FC = () => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className="cursor-pointer text-grayText hover:text-electric dark:hover:text-electric uppercase transition-colors"
+                  className="nav-link uppercase"
                 >
                   {link.label}
                 </Link>
@@ -64,9 +62,9 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          <hr className="border-gray-200 dark:border-white/10" />
+          <hr className="border-border" />
 
-          <p className="w-full text-center mt-12 text-graytext">
+          <p className="w-full text-center mt-12 text-dim font-mono text-sm">
             Copyright © {currentYear} Ronel Melendrez. All rights reserved.
           </p>
         </div>
