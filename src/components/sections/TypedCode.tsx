@@ -1,117 +1,147 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useInView } from 'framer-motion';
 
-interface Token {
-  text: string;
-  color: string;
-}
+type Token = [className: string, text: string];
 
-const keywords = new RegExp('^(?:const|export|default|import|from|return|function|new|if|else|true|false|null|undefined|let|var)$');
-const types = new RegExp('^(?:React|FC|string|number|boolean|void|any|Promise|HTMLElement)$');
-
-function tokenize(line: string): Token[] {
-  const tokens: Token[] = [];
-  let i = 0;
-
-  while (i < line.length) {
-    if (line[i] === ' ' || line[i] === '\t') {
-      let j = i;
-      while (j < line.length && (line[j] === ' ' || line[j] === '\t')) j++;
-      tokens.push({ text: line.slice(i, j), color: '' });
-      i = j;
-      continue;
-    }
-    if (line[i] === '"' || line[i] === "'" || line[i] === '`') {
-      const q = line[i];
-      let j = i + 1;
-      while (j < line.length && line[j] !== q) j++;
-      j++;
-      tokens.push({ text: line.slice(i, j), color: '#ce9178' });
-      i = j;
-      continue;
-    }
-    if (/[0-9]/.test(line[i])) {
-      let j = i;
-      while (j < line.length && /[0-9.]/.test(line[j])) j++;
-      tokens.push({ text: line.slice(i, j), color: '#b5cea8' });
-      i = j;
-      continue;
-    }
-    if (/[\w$_]/.test(line[i])) {
-      let j = i;
-      while (j < line.length && /[\w$_]/.test(line[j])) j++;
-      const word = line.slice(i, j);
-      if (keywords.test(word)) {
-        tokens.push({ text: word, color: '#569cd6' });
-      } else if (types.test(word)) {
-        tokens.push({ text: word, color: '#4ec9b0' });
-      } else if (j < line.length && line[j] === '(') {
-        tokens.push({ text: word, color: '#dcdcaa' });
-      } else {
-        tokens.push({ text: word, color: '#9cdcfe' });
-      }
-      i = j;
-      continue;
-    }
-    tokens.push({ text: line[i], color: '#d4d4d4' });
-    i++;
-  }
-  return tokens;
-}
-
-const rawLines = [
-  'const app = createApp({',
-  '  name: "portfolio",',
-  '  stack: ["React", "TypeScript", "Vite"],',
-  '  style: "Tailwind CSS",',
-  '  animation: "Framer Motion",',
-  '});',
-  '',
-  'export default app;',
+const CODE_LINES: Token[][] = [
+  [
+    ['tok-key', 'const'],
+    ['tok-punc', ' '],
+    ['tok-var', 'developer'],
+    ['tok-punc', ' = {'],
+  ],
+  [
+    ['tok-fn', '  name'],
+    ['tok-punc', ': '],
+    ['tok-str', '"Ronel Melendrez"'],
+    ['tok-punc', ','],
+  ],
+  [
+    ['tok-fn', '  role'],
+    ['tok-punc', ': '],
+    ['tok-str', '"Full Stack Developer"'],
+    ['tok-punc', ','],
+  ],
+  [
+    ['tok-fn', '  focus'],
+    ['tok-punc', ': ['],
+    ['tok-str', '"React"'],
+    ['tok-punc', ', '],
+    ['tok-str', '"Node.js"'],
+    ['tok-punc', ', '],
+    ['tok-str', '"AWS"'],
+    ['tok-punc', '],'],
+  ],
+  [
+    ['tok-fn', '  experience'],
+    ['tok-punc', ': '],
+    ['tok-var', '7'],
+    ['tok-punc', ', '],
+    ['tok-com', '// years'],
+  ],
+  [
+    ['tok-fn', '  available'],
+    ['tok-punc', ': '],
+    ['tok-key', 'true'],
+  ],
+  [['tok-punc', '};']],
+  [],
+  [['tok-com', '// what I actually do']],
+  [
+    ['tok-key', 'function'],
+    ['tok-punc', ' '],
+    ['tok-fn', 'shipProduct'],
+    ['tok-punc', '(idea) {'],
+  ],
+  [
+    ['tok-key', '  return'],
+    ['tok-punc', ' '],
+    ['tok-fn', 'design'],
+    ['tok-punc', '(idea)'],
+  ],
+  [
+    ['tok-punc', '    .'],
+    ['tok-fn', 'then'],
+    ['tok-punc', '('],
+    ['tok-fn', 'build'],
+    ['tok-punc', ')'],
+  ],
+  [
+    ['tok-punc', '    .'],
+    ['tok-fn', 'then'],
+    ['tok-punc', '('],
+    ['tok-fn', 'ship'],
+    ['tok-punc', '); '],
+  ],
+  [['tok-punc', '}']],
 ];
 
-const tokenizedLines = rawLines.map(tokenize);
-const totalChars = tokenizedLines.flat().reduce((sum, t) => sum + t.text.length, 0);
-
 export default function TypedCode() {
-  const [charCount, setCharCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.5 });
+  const [visibleLines, setVisibleLines] = useState<{ segs: Token[]; charCount: number }[]>([]);
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
-    let count = 0;
-    const timer = setInterval(() => {
-      count++;
-      setCharCount(count);
-      if (count >= totalChars) clearInterval(timer);
-    }, 32);
-    return () => clearInterval(timer);
-  }, []);
+    if (!inView) return;
+    let lineIndex = 0;
+    let charIndex = 0;
+    let timeoutId: ReturnType<typeof setTimeout>;
 
-  let remaining = charCount;
+    const typeNext = () => {
+      if (lineIndex >= CODE_LINES.length) {
+        setDone(true);
+        return;
+      }
+      const segs = CODE_LINES[lineIndex];
+      const fullLength = segs.reduce((sum, [, text]) => sum + text.length, 0);
+
+      const typeChar = () => {
+        setVisibleLines((prev) => {
+          const next = [...prev];
+          next[lineIndex] = { segs, charCount: charIndex };
+          return next;
+        });
+        if (charIndex <= fullLength) {
+          charIndex++;
+          timeoutId = setTimeout(typeChar, fullLength ? 14 : 0);
+        } else {
+          lineIndex++;
+          charIndex = 0;
+          timeoutId = setTimeout(typeNext, 90);
+        }
+      };
+      typeChar();
+    };
+
+    typeNext();
+    return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
 
   return (
-    <pre className="p-5 font-mono text-[13px] leading-relaxed overflow-hidden">
-      <code>
-        {tokenizedLines.map((tokens, lineIdx) => {
-          const rendered = tokens.map((token, tIdx) => {
-            if (remaining <= 0) return null;
-            const visible = token.text.slice(0, remaining);
-            remaining -= token.text.length;
-            if (!visible) return null;
-            return (
-              <span key={tIdx} style={token.color ? { color: token.color } : undefined}>
-                {visible}
-              </span>
-            );
-          });
-          return (
-            <div key={lineIdx}>
-              {rendered}
-            </div>
-          );
-        })}
-        {charCount < totalChars && (
-          <span className="inline-block w-[2px] h-[14px] bg-[#569cd6] animate-blink align-middle ml-0.5" />
-        )}
-      </code>
-    </pre>
+    <div className="editor-body" ref={ref}>
+      {visibleLines.map((line, i) => {
+        let remaining = line.charCount;
+        return (
+          <div key={i}>
+            <span className="ln">{i + 1}</span>
+            <span>
+              {line.segs.map(([cls, text], j) => {
+                if (remaining <= 0) return null;
+                const take = Math.min(text.length, remaining);
+                remaining -= take;
+                return (
+                  <span key={j} className={cls}>
+                    {text.slice(0, take)}
+                  </span>
+                );
+              })}
+            </span>
+          </div>
+        );
+      })}
+      {done && <span className="cursor-blink animate-blink" />}
+    </div>
   );
 }
