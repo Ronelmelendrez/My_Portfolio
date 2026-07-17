@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import SocialLinks from "../common/SocialLinks";
+import TechIconsBg from "../common/TechIconBg";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,6 +10,7 @@ const Footer = () => {
       {/* CTA */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
+        <TechIconsBg seed={99} count={16} opacity={0.22} />
 
         <div className="relative mx-auto max-w-7xl px-6 py-24">
           <div className="mx-auto max-w-3xl text-center">
