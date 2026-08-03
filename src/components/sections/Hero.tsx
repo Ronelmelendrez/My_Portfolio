@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Ballpit from '../Ballpit';
 import Container from '../common/Container';
 import { Button } from '@/components/ui/button';
 import Counter from '../common/Counter';
@@ -6,8 +7,17 @@ import TypedCode from './TypedCode';
 
 export default function Hero() {
   return (
-    <section id="home" className="flex min-h-screen items-center pt-[5px]">
-      <Container className="grid grid-cols-1 items-center gap-14 md:grid-cols-[1.05fr_0.95fr]">
+    <section id="home" className="relative flex min-h-screen items-center overflow-hidden pt-[5px]">
+      <div className="absolute inset-0 opacity-45">
+        <Ballpit
+          count={100}
+          gravity={0.01}
+          friction={0.9975}
+          wallBounce={0.95}
+          followCursor
+        />
+      </div>
+      <Container className="relative z-10 grid grid-cols-1 items-center gap-14 md:grid-cols-[1.05fr_0.95fr]">
         <div>
           <h1 className="mb-5 font-display text-[clamp(38px,5.4vw,60px)] font-bold leading-[1.08] tracking-tight">
             Building software
