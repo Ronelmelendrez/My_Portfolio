@@ -41,6 +41,7 @@
   --input: var(--border-dark);
   --ring: var(--cyan);
   --radius: 0.85rem;
+  --grid-line: rgba(156, 163, 175, 0.04);
 }
 
 html[data-theme='light'] {
@@ -50,6 +51,7 @@ html[data-theme='light'] {
   --text-dim: #52627a;
   --border-dark: rgba(15, 23, 42, 0.1);
   --surface: rgba(255, 255, 255, 0.65);
+  --grid-line: rgba(107, 114, 128, 0.03);
 }
 
 * {
@@ -84,10 +86,10 @@ body {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(var(--border-dark) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border-dark) 1px, transparent 1px);
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 64px 64px;
-    mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black 40%, transparent 90%);
+    mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 45%, transparent 95%);
   }
   .glow-orb {
     position: absolute;

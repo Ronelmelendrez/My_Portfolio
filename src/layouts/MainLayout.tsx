@@ -12,6 +12,7 @@ const MainLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <div className="bg-atmos" aria-hidden="true" />
       <Navbar activeSection="" theme={theme} onToggleTheme={() => setTheme(t => t === 'dark' ? 'light' : 'dark')} />
       <main className="flex-grow pt-20">
         <Outlet />
