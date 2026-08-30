@@ -27,22 +27,22 @@ export default function About() {
         </Reveal>
 
         <Reveal delay={0.1}>
-  <div className="flex justify-center mt-10">
-    <div className="relative p-3 mt-10">
-      {/* Glow */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-accent to-primary opacity-40 blur-2xl" />
+          <div className="flex justify-center mt-10">
+            <div className="relative p-3 mt-10">
+             {/* Glow */}
+             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-accent to-primary opacity-40 blur-2xl" />
 
-      {/* Image */}
-      <div className="relative h-72 w-72 md:h-80 md:w-80 lg:h-96 lg:w-96 overflow-hidden rounded-full border border-border bg-card">
-        <img
-          src={meImage}
-          alt="Ronel Melendrez"
-          className="h-full w-full object-cover"
-        />
-      </div>
-    </div>
-  </div>
-</Reveal>
+             {/* Image */}
+             <div className="relative h-72 w-72 md:h-80 md:w-80 lg:h-96 lg:w-96 overflow-hidden rounded-full border border-border bg-card">
+                <img
+                   src={meImage}
+                   alt="Ronel Melendrez"
+                   className="h-full w-full object-cover"
+                 />
+             </div>
+           </div>
+         </div>
+        </Reveal>
       </Container>
     </section>
   );
