@@ -1,7 +1,7 @@
 import Reveal from '../common/Reveal';
 import Container from '../common/Container';
 import SectionTitle from '../common/SectionTitle';
-import meImage from '@/assets/images/me.png';
+import meImage from '@/assets/images/me.webp';
 
 export default function About() {
   return (
