@@ -1,16 +1,20 @@
-import { FiExternalLink, FiGithub } from 'react-icons/fi';
+import { useState } from 'react';
+import { FiExternalLink, FiGithub, FiMaximize2 } from 'react-icons/fi';
 import Reveal from '../common/Reveal';
 import Container from '../common/Container';
 import SectionTitle from '../common/SectionTitle';
+import ProjectModal from './ProjectModal';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { projects } from '@/data/projects';
+import { projects, type Project } from '@/data/projects';
 
 interface ProjectsProps {
   featured?: boolean;
 }
 
 export default function Projects({ featured: _featured }: ProjectsProps) {
+  const [selected, setSelected] = useState<Project | null>(null);
+
   return (
     <section id="projects" className="py-[120px]">
       <Container>
@@ -25,7 +29,19 @@ export default function Projects({ featured: _featured }: ProjectsProps) {
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, i) => (
             <Reveal key={project.title} delay={(i % 3) * 0.08}>
-              <Card className="pcard flex h-full flex-col overflow-hidden">
+              <Card
+                className="pcard flex h-full cursor-pointer flex-col overflow-hidden text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                role="button"
+                tabIndex={0}
+                aria-label={`View full details of ${project.title}`}
+                onClick={() => setSelected(project)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelected(project);
+                  }
+                }}
+              >
                 <div className="pcard-bar">
                   <i className="h-[9px] w-[9px] rounded-full" style={{ background: '#ff5f56' }} />
                   <i className="h-[9px] w-[9px] rounded-full" style={{ background: '#ffbd2e' }} />
@@ -44,13 +60,19 @@ export default function Projects({ featured: _featured }: ProjectsProps) {
                       </Badge>
                     ))}
                   </div>
-                  <div className="pcard-links flex gap-4 text-[13px] font-semibold">
+                  <div
+                    className="pcard-links flex gap-4 text-[13px] font-semibold"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <a href={project.liveUrl} className="text-dim flex items-center gap-1.5">
                       <FiExternalLink size={13} /> Live Demo
                     </a>
                     <a href={project.githubUrl} className="text-dim flex items-center gap-1.5">
                       <FiGithub size={13} /> GitHub
                     </a>
+                    <span className="text-dim ml-auto flex items-center gap-1.5 transition-colors group-hover:text-[var(--cyan)]">
+                      Details <FiMaximize2 size={13} />
+                    </span>
                   </div>
                 </CardContent>
               </Card>
@@ -58,6 +80,8 @@ export default function Projects({ featured: _featured }: ProjectsProps) {
           ))}
         </div>
       </Container>
+
+      <ProjectModal project={selected} onClose={() => setSelected(null)} />
     </section>
   );
 }
