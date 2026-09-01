@@ -41,15 +41,15 @@ export default function Hero() {
 
           <div className="flex gap-9">
             <div>
-              <Counter target={7} className="font-display block text-2xl" />
+              <Counter target={2} className="font-display block text-2xl" />
               <span className="text-dim text-[12.5px]">Years Experience</span>
             </div>
             <div>
-              <Counter target={48} className="font-display block text-2xl" />
+              <Counter target={8} className="font-display block text-2xl" />
               <span className="text-dim text-[12.5px]">Projects Shipped</span>
             </div>
             <div>
-              <Counter target={26} className="font-display block text-2xl" />
+              <Counter target={5} className="font-display block text-2xl" />
               <span className="text-dim text-[12.5px]">Happy Clients</span>
             </div>
           </div>
