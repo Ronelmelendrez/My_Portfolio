@@ -8,7 +8,7 @@ export const skillLayers: SkillLayer[] = [
   {
     title: 'Frontend',
     label: 'WHAT USERS TOUCH',
-    items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Vue.js'],
+    items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Vue.js', 'HTML', 'CSS', 'JavaScript'],
   },
   {
     title: 'Backend',
@@ -28,7 +28,7 @@ export const skillLayers: SkillLayer[] = [
   {
     title: 'Cloud & DevOps',
     label: 'WHAT KEEPS IT UP AT 3AM',
-    items: ['AWS', 'Docker', 'CI/CD', 'Vercel', 'Terraform'],
+    items: ['AWS', 'Docker', 'CI/CD', 'Vercel', 'Render'],
   },
   {
     title: 'Tools',
@@ -47,6 +47,7 @@ export const marqueeStack: string[] = [
   'PostgreSQL',
   'MySQL',
   'Supabase',
+  'Render',
   'AWS',
   'Docker',
   'TypeScript',
