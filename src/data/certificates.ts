@@ -2,7 +2,8 @@ export interface Certificate {
   slug: string;
   version: string;
   issuer: string;
-  credentialId: string;
+  credentialId?: string;
+  image?: string;
 }
 
 export const certificates: Certificate[] = [
@@ -35,5 +36,17 @@ export const certificates: Certificate[] = [
     version: '2020',
     issuer: 'The Linux Foundation',
     credentialId: 'CKAD-2020-30894',
+  },
+  {
+    slug: 'webinar-frontend-mastery',
+    version: '2024',
+    issuer: 'Frontend Masters',
+    credentialId: 'WEB-FM-2024-55671',
+  },
+  {
+    slug: 'seminar-fullstack-development',
+    version: '2023',
+    issuer: 'DevConf · Online',
+    credentialId: 'SEM-FD-2023-12389',
   },
 ];
