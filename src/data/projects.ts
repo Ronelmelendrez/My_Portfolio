@@ -1,3 +1,33 @@
+import orbit1 from '@/assets/images/project/orbit-1.png';
+import orbit2 from '@/assets/images/project/orbit-2.png';
+import orbit3 from '@/assets/images/project/orbit-3.png';
+import orbit4 from '@/assets/images/project/orbit-4.png';
+import pulse1 from '@/assets/images/project/pulse-1.png';
+import pulse2 from '@/assets/images/project/pulse-2.png';
+import pulse3 from '@/assets/images/project/pulse-3.png';
+import pulse4 from '@/assets/images/project/pulse-4.png';
+import ledger1 from '@/assets/images/project/ledger-1.png';
+import ledger2 from '@/assets/images/project/ledger-2.png';
+import ledger3 from '@/assets/images/project/ledger-3.png';
+import ledger4 from '@/assets/images/project/ledger-4.png';
+import nimbus1 from '@/assets/images/project/nimbus-1.png';
+import nimbus2 from '@/assets/images/project/nimbus-2.png';
+import nimbus3 from '@/assets/images/project/nimbus-3.png';
+import nimbus4 from '@/assets/images/project/nimbus-4.png';
+import fieldnote1 from '@/assets/images/project/fieldnote-1.png';
+import fieldnote2 from '@/assets/images/project/fieldnote-2.png';
+import fieldnote3 from '@/assets/images/project/fieldnote-3.png';
+import fieldnote4 from '@/assets/images/project/fieldnote-4.png';
+import aperture1 from '@/assets/images/project/aperture-1.png';
+import aperture2 from '@/assets/images/project/aperture-2.png';
+import aperture3 from '@/assets/images/project/aperture-3.png';
+import aperture4 from '@/assets/images/project/aperture-4.png';
+import farmWebHome from '@/assets/images/project/farm2home_website/webhomepage.webp';
+import farmShop from '@/assets/images/project/farm2home_website/shoppage.webp';
+import farmAbout from '@/assets/images/project/farm2home_website/aboutpage.webp';
+import farmHowItWorks from '@/assets/images/project/farm2home_website/howitworks.webp';
+import farmContact from '@/assets/images/project/farm2home_website/contactpage.webp';
+
 export interface Project {
   title: string;
   description: string;
@@ -5,17 +35,23 @@ export interface Project {
   gradient: string;
   liveUrl: string;
   githubUrl: string;
+  /** Cover image shown on the project card and used as the slider's first slide. */
+  image?: string;
+  /** Gallery images shown in the project modal slider. */
+  images?: string[];
   /** Full-detail content shown in the project modal (falls back to description when omitted). */
   longDescription?: string;
   features?: string[];
   role?: string;
   year?: string;
   status?: string;
-  /** Gallery images for the modal slider — 4 auto-generated artwork slides by default. */
-  images?: string[];
+  subtitle?: string;
+  category?: string;
+  featured?: boolean;
+  platform?: string;
 }
 
-const projectData: Project[] = [
+export const projects: Project[] = [
   {
     title: 'Orbit — Analytics Dashboard',
     description:
@@ -24,6 +60,8 @@ const projectData: Project[] = [
     gradient: '135deg, #3B82F6, #06B6D4',
     liveUrl: '#',
     githubUrl: '#',
+    image: orbit1,
+    images: [orbit1, orbit2, orbit3, orbit4],
     longDescription:
       'Orbit is a real-time analytics platform that ingests over 2 million events per day and turns them into live, explorable dashboards. Events stream through a Node.js ingestion layer, aggregate into PostgreSQL, and hot datasets are cached in Redis to keep query responses under a second — even across months of historical data.',
     features: [
@@ -37,22 +75,32 @@ const projectData: Project[] = [
     status: 'Live',
   },
   {
-    title: 'Fieldnote — Mobile CRM',
-    description: 'Cross-platform CRM for field sales teams with offline-first sync.',
-    tech: ['React Native', 'Expo', 'GraphQL'],
-    gradient: '135deg, #06B6D4, #3B82F6',
-    liveUrl: '#',
-    githubUrl: '#',
+    title: 'Farm2Home — Website',
+    description:
+    'Public-facing website introducing the Farm2Home startup, its mission, services, and farm-to-home marketplace.',
+    tech: ['React', 'Vite', 'Tailwind CSS', 'Vercel'],
+    gradient: '135deg, #22C55E, #14B8A6',
+    liveUrl: 'https://farm2homewebsite.vercel.app/',
+    githubUrl: 'https://github.com/Ronelmelendrez/Farmtohome',
+    image: farmWebHome,
+    images: [
+      farmShop,
+      farmHowItWorks,
+      farmAbout,
+      farmContact,
+  ],
     longDescription:
-      'Fieldnote is a cross-platform CRM built for field sales teams who work in areas with unreliable connectivity. Every interaction is stored locally first through an offline-first sync engine, then reconciled with the GraphQL backend when a connection returns — so reps never lose a note, contact, or deal update.',
+      'The Farm2Home website serves as the public-facing platform for the startup. It introduces the Farm2Home concept, communicates its value to customers, and presents the vision of making fresh local products more accessible through digital technology.',
     features: [
-      'Offline-first data layer with automatic background sync',
-      'Conflict-free merge of offline edits per field',
-      'Route planning and check-in reminders for client visits',
-      'Push notifications for deal stage changes',
-    ],
-    role: 'Mobile Developer',
-    year: '2024',
+      'Responsive startup landing page',
+      'Farm2Home brand and startup presentation',
+      'Product and service showcase',
+      'Responsive design for desktop and mobile',
+      'Clear calls-to-action for customers and partners',
+      'Deployed and accessible through Vercel',
+  ],
+    role: 'Frontend Developer',
+    year: '2026',
     status: 'Live',
   },
   {
@@ -62,6 +110,8 @@ const projectData: Project[] = [
     gradient: '135deg, #3B82F6, #1E293B',
     liveUrl: '#',
     githubUrl: '#',
+    image: ledger1,
+    images: [ledger1, ledger2, ledger3, ledger4],
     longDescription:
       'Ledger is a multi-tenant invoicing and billing API that powers invoicing for 40+ small businesses. It handles client management, recurring invoices, payment tracking, and Stripe payment collection — with strict per-tenant data isolation and idempotent webhooks so no payment is ever double-counted.',
     features: [
@@ -81,6 +131,8 @@ const projectData: Project[] = [
     gradient: '135deg, #06B6D4, #1E293B',
     liveUrl: '#',
     githubUrl: '#',
+    image: pulse1,
+    images: [pulse1, pulse2, pulse3, pulse4],
     longDescription:
       'Pulse is a lightweight team messaging tool focused on speed: threads, full-text search, and file sharing without the bloat. Messages are delivered over Socket.io with optimistic UI updates, while PostgreSQL stores the canonical history that powers instant search across every channel.',
     features: [
@@ -100,6 +152,8 @@ const projectData: Project[] = [
     gradient: '135deg, #3B82F6, #06B6D4',
     liveUrl: '#',
     githubUrl: '#',
+    image: nimbus1,
+    images: [nimbus1, nimbus2, nimbus3, nimbus4],
     longDescription:
       'Nimbus is a one-click deployment pipeline that abstracts away AWS infrastructure. Applications are containerized with Docker, provisioned with Terraform modules, and deployed behind a load balancer with automatic SSL, health checks, and zero-downtime rollouts — no cloud expertise required.',
     features: [
@@ -113,12 +167,27 @@ const projectData: Project[] = [
     status: 'Live',
   },
   {
+    title: 'Fieldnote — Mobile CRM',
+    description: 'Offline-first field service app with a browser-native sync engine.',
+    tech: ['React Native', 'RxDB', 'Express'],
+    gradient: '135deg, #06B6D4, #3B82F6',
+    liveUrl: '#',
+    githubUrl: '#',
+    image: fieldnote1,
+    images: [fieldnote1, fieldnote2, fieldnote3, fieldnote4],
+    role: 'Mobile Developer',
+    year: '2023',
+    status: 'Live',
+  },
+  {
     title: 'Aperture — Design System',
     description: 'Shared component library adopted across six internal products.',
     tech: ['React', 'Storybook', 'Tailwind'],
     gradient: '135deg, #1E293B, #3B82F6',
     liveUrl: '#',
     githubUrl: '#',
+    image: aperture1,
+    images: [aperture1, aperture2, aperture3, aperture4],
     longDescription:
       'Aperture is a shared component library adopted across six internal products. Built on React and Tailwind with accessibility baked in, every component ships with Storybook documentation, visual regression tests, and design tokens that keep color and spacing consistent across every product surface.',
     features: [
@@ -132,37 +201,3 @@ const projectData: Project[] = [
     status: 'Live',
   },
 ];
-
-/**
- * Mock gallery images for the project modals, imported through Vite's asset
- * pipeline from `src/assets/images/project/<slug>-<1-4>.png`.
- * Drop files in that folder (or replace them with real screenshots) and they
- * are picked up automatically — no code changes needed.
- */
-const galleryImages = import.meta.glob<{ default: string }>('../assets/images/project/*.png', {
-  eager: true,
-});
-
-const imageByFile = new Map(
-  Object.entries(galleryImages).map(([file, mod]) => [file.split('/').pop() as string, mod.default]),
-);
-
-/** 'Orbit — Analytics Dashboard' -> 'orbit' */
-const toSlug = (title: string): string =>
-  title
-    .split(/[—–\-:(']/)[0]
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-
-/** The 4 gallery images for a project (`<slug>-1.png` … `<slug>-4.png`). */
-const projectImages = (title: string): string[] =>
-  [1, 2, 3, 4]
-    .map((n) => imageByFile.get(`${toSlug(title)}-${n}.png`))
-    .filter((src): src is string => Boolean(src));
-
-export const projects: Project[] = projectData.map((project) => {
-  const images = projectImages(project.title);
-  return images.length > 0 ? { ...project, images } : project;
-});
