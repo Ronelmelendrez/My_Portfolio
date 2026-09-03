@@ -47,9 +47,22 @@ export default function Projects({ featured: _featured }: ProjectsProps) {
                   <i className="h-[9px] w-[9px] rounded-full" style={{ background: '#ffbd2e' }} />
                   <i className="h-[9px] w-[9px] rounded-full" style={{ background: '#27c93f' }} />
                 </div>
-                <div className="pcard-img" style={{ background: `linear-gradient(${project.gradient})` }}>
-                  <div />
-                </div>
+                {project.image ? (
+                  <div className="pcard-img overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className="pcard-img"
+                    style={{ background: `linear-gradient(${project.gradient})` }}
+                  >
+                    <div />
+                  </div>
+                )}
                 <CardContent className="flex-1 p-5">
                   <h3 className="font-display mb-2 text-[17px]">{project.title}</h3>
                   <p className="text-dim mb-4 text-[13.5px] leading-relaxed">{project.description}</p>
