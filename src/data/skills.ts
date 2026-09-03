@@ -33,7 +33,7 @@ export const skillLayers: SkillLayer[] = [
   {
     title: 'Tools',
     label: 'HOW THE TEAM MOVES FAST',
-    items: ['Git', 'Figma', 'Linear', 'Postman'],
+    items: ['Git', 'Figma', 'Postman'],
   },
 ];
 
