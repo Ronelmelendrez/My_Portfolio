@@ -6,10 +6,6 @@ import pulse1 from '@/assets/images/project/pulse-1.png';
 import pulse2 from '@/assets/images/project/pulse-2.png';
 import pulse3 from '@/assets/images/project/pulse-3.png';
 import pulse4 from '@/assets/images/project/pulse-4.png';
-import ledger1 from '@/assets/images/project/ledger-1.png';
-import ledger2 from '@/assets/images/project/ledger-2.png';
-import ledger3 from '@/assets/images/project/ledger-3.png';
-import ledger4 from '@/assets/images/project/ledger-4.png';
 import nimbus1 from '@/assets/images/project/nimbus-1.png';
 import nimbus2 from '@/assets/images/project/nimbus-2.png';
 import nimbus3 from '@/assets/images/project/nimbus-3.png';
@@ -27,6 +23,11 @@ import farmShop from '@/assets/images/project/farm2home_website/shoppage.webp';
 import farmAbout from '@/assets/images/project/farm2home_website/aboutpage.webp';
 import farmHowItWorks from '@/assets/images/project/farm2home_website/howitworks.webp';
 import farmContact from '@/assets/images/project/farm2home_website/contactpage.webp';
+import f2hAdminLandingPage from '@/assets/images/project/farm2home_admin/adminhomepage.webp';
+import f2hAdminProductPage from '@/assets/images/project/farm2home_admin/adminproductpage.webp';
+import f2hAdminInventorypage from '@/assets/images/project/farm2home_admin/admininventorypage.webp';
+import f2hAdminDeliveryPage from '@/assets/images/project/farm2home_admin/admindeliverypage.webp';
+import f2hAdminAnalyticsPage from '@/assets/images/project/farm2home_admin/adminanalyticspage.webp';
 
 export interface Project {
   title: string;
@@ -104,25 +105,33 @@ export const projects: Project[] = [
     status: 'Live',
   },
   {
-    title: 'Ledger — Invoicing API',
-    description: 'Multi-tenant invoicing and billing API used by 40+ small businesses.',
-    tech: ['Express', 'MongoDB', 'Stripe API'],
-    gradient: '135deg, #3B82F6, #1E293B',
-    liveUrl: '#',
-    githubUrl: '#',
-    image: ledger1,
-    images: [ledger1, ledger2, ledger3, ledger4],
-    longDescription:
-      'Ledger is a multi-tenant invoicing and billing API that powers invoicing for 40+ small businesses. It handles client management, recurring invoices, payment tracking, and Stripe payment collection — with strict per-tenant data isolation and idempotent webhooks so no payment is ever double-counted.',
-    features: [
-      'Multi-tenant architecture with strict data isolation',
-      'Recurring invoices with automatic retry on failed payments',
-      'Stripe integration with idempotent webhook processing',
-      'PDF invoice generation and email delivery',
+    title: 'Farm2Home — Admin Dashboard',
+    description:
+      'Administrative dashboard for managing Farm2Home products, customers, orders, inventory, and platform operations.',
+    tech: ['React', 'Express.js', 'Supabase', 'Tailwind CSS'],
+    gradient: '135deg, #15803D, #0F766E',
+    liveUrl: 'https://farmtohome-ashy.vercel.app/',
+    githubUrl: 'https://github.com/Ronelmelendrez/Farmtohome',
+    image: f2hAdminLandingPage,
+    images: [
+      f2hAdminProductPage,
+      f2hAdminInventorypage,
+      f2hAdminDeliveryPage,
+      f2hAdminAnalyticsPage,
     ],
-    role: 'Backend Developer',
-    year: '2023',
-    status: 'Live',
+    longDescription:
+      'The Farm2Home Admin Dashboard provides the operational side of the startup ecosystem. It allows administrators to manage products, monitor customer orders, manage inventory, and oversee the data supporting the Farm2Home mobile application.',
+    features: [
+      'Product and category management',
+      'Customer and order management',
+      'Inventory and stock management',
+      'Centralized operational dashboard',
+      'Supabase-powered database integration',
+      'Administrative tools for managing the Farm2Home platform',
+    ],
+    role: 'Full Stack Developer',
+   year: '2026',
+    status: 'Completed',
   },
   {
     title: 'Pulse — Team Chat',
