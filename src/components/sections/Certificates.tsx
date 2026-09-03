@@ -1,12 +1,15 @@
+import { useState } from 'react';
 import { FiExternalLink, FiEye } from 'react-icons/fi';
 import Reveal from '../common/Reveal';
 import Container from '../common/Container';
 import SectionTitle from '../common/SectionTitle';
+import CertificateModal from './CertificateModal';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { certificates } from '@/data/certificates';
+import { certificates, type Certificate } from '@/data/certificates';
 
 export default function Certificates() {
+  const [selected, setSelected] = useState<Certificate | null>(null);
   return (
     <section id="certificates" className="py-[120px]">
       <Container>
@@ -47,14 +50,13 @@ export default function Certificates() {
                     <div className="text-dim flex items-center gap-4 font-mono text-[12px]">
                       {cert.credentialId && <span>ID: {cert.credentialId}</span>}
                       {cert.image && (
-                        <a
-                          href={cert.image}
-                          target="_blank"
-                          rel="noreferrer"
+                        <button
+                          type="button"
+                          onClick={() => setSelected(cert)}
                           className="cert-foot flex items-center gap-1.5 font-semibold"
                         >
                           <FiEye size={12} /> view certificate
-                        </a>
+                        </button>
                       )}
                       <a href="#" className="cert-foot flex items-center gap-1.5 font-semibold">
                         <FiExternalLink size={12} /> view credential
@@ -68,6 +70,7 @@ export default function Certificates() {
           </div>
         </Reveal>
       </Container>
+      <CertificateModal cert={selected} onClose={() => setSelected(null)} />
     </section>
   );
 }
