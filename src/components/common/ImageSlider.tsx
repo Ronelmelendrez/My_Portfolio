@@ -20,7 +20,8 @@ const slideVariants = {
  * a slide counter, keyboard arrow keys, and touch/mouse drag — with
  * directional framer-motion transitions (fade-only when reduced motion
  * is preferred). Slides are absolutely positioned so they sweep over
- * each other, and the container keeps the card banner height (170px).
+ * each other, and the container fills a large share of the modal height
+ * so full-page screenshots display clearly.
  */
 export default function ImageSlider({ images, alt }: ImageSliderProps) {
   const [[index, direction], setSlide] = useState<SlideState>([0, 1]);
@@ -54,7 +55,7 @@ export default function ImageSlider({ images, alt }: ImageSliderProps) {
 
   return (
     <div
-      className="relative h-[170px] shrink-0 overflow-hidden"
+      className="relative h-[45vh] shrink-0 overflow-hidden"
       role="region"
       aria-roledescription="carousel"
       aria-label={`${alt} gallery`}
