@@ -58,9 +58,16 @@ export default function Certificates() {
                           <FiEye size={12} /> view certificate
                         </button>
                       )}
-                      <a href="#" className="cert-foot flex items-center gap-1.5 font-semibold">
-                        <FiExternalLink size={12} /> view credential
-                      </a>
+                      {cert.credentialUrl && (
+                        <a
+                          href={cert.credentialUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="cert-foot flex items-center gap-1.5 font-semibold"
+                        >
+                          <FiExternalLink size={12} /> view credential
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
