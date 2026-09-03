@@ -1,4 +1,4 @@
-import { FiExternalLink } from 'react-icons/fi';
+import { FiExternalLink, FiEye } from 'react-icons/fi';
 import Reveal from '../common/Reveal';
 import Container from '../common/Container';
 import SectionTitle from '../common/SectionTitle';
@@ -45,7 +45,17 @@ export default function Certificates() {
                       Issued by <b className="font-medium text-cyan">{cert.issuer}</b>
                     </div>
                     <div className="text-dim flex items-center gap-4 font-mono text-[12px]">
-                      <span>ID: {cert.credentialId}</span>
+                      {cert.credentialId && <span>ID: {cert.credentialId}</span>}
+                      {cert.image && (
+                        <a
+                          href={cert.image}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="cert-foot flex items-center gap-1.5 font-semibold"
+                        >
+                          <FiEye size={12} /> view certificate
+                        </a>
+                      )}
                       <a href="#" className="cert-foot flex items-center gap-1.5 font-semibold">
                         <FiExternalLink size={12} /> view credential
                       </a>
