@@ -400,8 +400,16 @@ body {
   .cert-name .ver {
     color: var(--amber);
   }
-  .cert-foot a:hover {
+  .cert-foot a:hover,
+  .cert-foot button:hover {
     color: var(--cyan);
+  }
+  .cert-foot button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    color: inherit;
   }
 
   /* project cards */
