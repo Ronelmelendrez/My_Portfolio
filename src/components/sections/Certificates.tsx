@@ -1,15 +1,30 @@
 import { useState } from 'react';
-import { FiExternalLink, FiEye } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight, FiExternalLink, FiEye } from 'react-icons/fi';
 import Reveal from '../common/Reveal';
 import Container from '../common/Container';
 import SectionTitle from '../common/SectionTitle';
 import CertificateModal from './CertificateModal';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/Button';
 import { Separator } from '@/components/ui/separator';
 import { certificates, type Certificate } from '@/data/certificates';
 
+const PER_PAGE = 5;
+
 export default function Certificates() {
   const [selected, setSelected] = useState<Certificate | null>(null);
+  const [page, setPage] = useState(1);
+
+  const totalPages = Math.max(1, Math.ceil(certificates.length / PER_PAGE));
+  const start = (page - 1) * PER_PAGE;
+  const visible = certificates.slice(start, start + PER_PAGE);
+
+  const goToPage = (next: number) => {
+    setPage(Math.min(totalPages, Math.max(1, next)));
+    const el = document.getElementById('certificates');
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <section id="certificates" className="py-[120px]">
       <Container>
@@ -31,7 +46,7 @@ export default function Certificates() {
             </div>
             <Separator />
 
-            {certificates.map((cert, i) => (
+            {visible.map((cert, i) => (
               <div key={cert.slug}>
                 <div className="cert-item">
                   <div className="cert-check">✓</div>
@@ -71,9 +86,35 @@ export default function Certificates() {
                     </div>
                   </div>
                 </div>
-                {i < certificates.length - 1 && <Separator />}
+                {i < visible.length - 1 && <Separator />}
               </div>
             ))}
+
+            {totalPages > 1 && (
+              <div className="flex items-center justify-between px-6 py-4">
+                <span className="text-dim font-mono text-[12.5px]">
+                  page {page} / {totalPages}
+                </span>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={page === 1}
+                    onClick={() => goToPage(page - 1)}
+                  >
+                    <FiArrowLeft size={14} /> prev
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={page === totalPages}
+                    onClick={() => goToPage(page + 1)}
+                  >
+                    next <FiArrowRight size={14} />
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
         </Reveal>
       </Container>
