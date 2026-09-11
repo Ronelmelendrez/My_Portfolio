@@ -37,20 +37,43 @@ export const skillLayers: SkillLayer[] = [
   },
 ];
 
-export const marqueeStack: string[] = [
-  'React',
-  'Next.js',
-  'Node.js',
-  'Express',
-  'Vue.js',
-  'React Native',
-  'PostgreSQL',
-  'MySQL',
-  'Supabase',
-  'Render',
-  'AWS',
-  'Docker',
-  'TypeScript',
-  'GraphQL',
-  'Redis',
+import type { IconType } from 'react-icons';
+import {
+  SiReact,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiExpress,
+  SiVuedotjs,
+  SiPostgresql,
+  SiMysql,
+  SiSupabase,
+  SiRender,
+  SiDocker,
+  SiTypescript,
+  SiGraphql,
+  SiRedis,
+} from 'react-icons/si';
+import { FaAws } from 'react-icons/fa';
+
+export interface MarqueeItem {
+  name: string;
+  icon: IconType;
+}
+
+export const marqueeStack: MarqueeItem[] = [
+  { name: 'React', icon: SiReact },
+  { name: 'Next.js', icon: SiNextdotjs },
+  { name: 'Node.js', icon: SiNodedotjs },
+  { name: 'Express', icon: SiExpress },
+  { name: 'Vue.js', icon: SiVuedotjs },
+  { name: 'React Native', icon: SiReact },
+  { name: 'PostgreSQL', icon: SiPostgresql },
+  { name: 'MySQL', icon: SiMysql },
+  { name: 'Supabase', icon: SiSupabase },
+  { name: 'Render', icon: SiRender },
+  { name: 'AWS', icon: FaAws },
+  { name: 'Docker', icon: SiDocker },
+  { name: 'TypeScript', icon: SiTypescript },
+  { name: 'GraphQL', icon: SiGraphql },
+  { name: 'Redis', icon: SiRedis },
 ];

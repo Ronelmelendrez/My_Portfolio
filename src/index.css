@@ -341,10 +341,6 @@ body {
     color: var(--text-dim);
     font-size: 13px;
   }
-  .marquee-track span b {
-    color: var(--cyan);
-    font-weight: 500;
-  }
 
   /* certificates - verified package manifest */
   .manifest {

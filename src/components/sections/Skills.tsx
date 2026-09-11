@@ -43,9 +43,10 @@ export default function Skills() {
         <Reveal delay={0.2}>
           <div className="marquee-wrap mt-14">
             <div className="marquee-track animate-marquee">
-              {[...marqueeStack, ...marqueeStack].map((item, i) => (
-                <span key={i}>
-                  <b>◆</b> {item}
+              {[...marqueeStack, ...marqueeStack].map(({ name, icon: Icon }, i) => (
+                <span key={i} className="flex items-center gap-2">
+                  <Icon className="text-[16px] text-[var(--cyan)]" aria-hidden />
+                  {name}
                 </span>
               ))}
             </div>
