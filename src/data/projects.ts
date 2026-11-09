@@ -6,10 +6,11 @@ import pulse1 from '@/assets/images/project/pulse-1.png';
 import pulse2 from '@/assets/images/project/pulse-2.png';
 import pulse3 from '@/assets/images/project/pulse-3.png';
 import pulse4 from '@/assets/images/project/pulse-4.png';
-import nimbus1 from '@/assets/images/project/nimbus-1.png';
-import nimbus2 from '@/assets/images/project/nimbus-2.png';
-import nimbus3 from '@/assets/images/project/nimbus-3.png';
-import nimbus4 from '@/assets/images/project/nimbus-4.png';
+import etacsLandingPage from '@/assets/images/project/excel-to-annex-c-system/excelToAnnexlandingPage.webp';
+import etacsDashboardPage from '@/assets/images/project/excel-to-annex-c-system/excelToAnnexDashboardPage.webp';
+import etacsExcelImportPage from '@/assets/images/project/excel-to-annex-c-system/excelToAnnexExcelImportsPage.webp';
+import etacsReportGeneratorPage from '@/assets/images/project/excel-to-annex-c-system/excelToAnnexReportGeneratorPage.webp';
+import etacsAuditPage from '@/assets/images/project/excel-to-annex-c-system/excelToAnnexAuditPage.webp';
 import fieldnote1 from '@/assets/images/project/fieldnote-1.png';
 import fieldnote2 from '@/assets/images/project/fieldnote-2.png';
 import fieldnote3 from '@/assets/images/project/fieldnote-3.png';
@@ -130,7 +131,7 @@ export const projects: Project[] = [
       'Administrative tools for managing the Farm2Home platform',
     ],
     role: 'Full Stack Developer',
-   year: '2026',
+    year: '2026',
     status: 'Completed',
   },
   {
@@ -155,25 +156,47 @@ export const projects: Project[] = [
     status: 'In Development',
   },
   {
-    title: 'Nimbus — Cloud Deploys',
-    description: 'One-click deployment pipeline abstraction over AWS and Docker.',
-    tech: ['AWS', 'Docker', 'Terraform'],
-    gradient: '135deg, #3B82F6, #06B6D4',
-    liveUrl: '#',
-    githubUrl: '#',
-    image: nimbus1,
-    images: [nimbus1, nimbus2, nimbus3, nimbus4],
-    longDescription:
-      'Nimbus is a one-click deployment pipeline that abstracts away AWS infrastructure. Applications are containerized with Docker, provisioned with Terraform modules, and deployed behind a load balancer with automatic SSL, health checks, and zero-downtime rollouts — no cloud expertise required.',
-    features: [
-      'One-click deploys from Git push to production',
-      'Terraform modules for repeatable AWS infrastructure',
-      'Zero-downtime rollouts gated by health checks',
-      'Automatic SSL provisioning and renewal',
-    ],
-    role: 'DevOps Engineer',
-    year: '2024',
-    status: 'Live',
+   title: 'Excel-to-Annex C — CAR Management System',
+   description:
+     'A web-based management system that transforms Excel household records into structured Case Assessment Reports (CAR) using the official Annex C document template.',
+   tech: [
+     'React',
+     'TypeScript',
+     'Vite',
+     'Supabase',
+     'PostgreSQL',
+     'Tailwind CSS',
+     'shadcn/ui',
+     'Docxtemplater',
+     'SheetJS',
+   ],
+   gradient: '135deg, #1D4ED8, #0F766E',
+   liveUrl: 'https://excel-to-annex-c-car-management-sys.vercel.app',
+   githubUrl: 'https://github.com/Ronelmelendrez/Excel-to-Annex-C_CAR_Management_System',
+   image: etacsLandingPage,
+   images: [
+     etacsDashboardPage,
+     etacsExcelImportPage,
+     etacsReportGeneratorPage,
+     etacsAuditPage,
+   ],
+   longDescription:
+     'The Excel-to-Annex C CAR Management System is designed to streamline the preparation and management of Case Assessment Reports. It provides a centralized platform for importing household records from Excel workbooks, validating household member information, managing case assessments, and generating standardized Annex C documents using a structured DOCX template. The system aims to reduce manual data encoding, improve data consistency, and support a more organized report preparation and review workflow.',
+   features: [
+     'Excel workbook upload and structured data parsing',
+     'Excel worksheet selection and column validation',
+     'Household and household member data management',
+     'Grantee identification and household data validation',
+     'Case Assessment Report creation and editing',
+     'Case assessment review and approval workflow',
+     'Official Annex C DOCX template integration',
+     'Automated DOCX and PDF report generation',
+     'Import history and validation error tracking',
+     'Supabase database integration and role-based access control',
+   ],
+   role: 'Full Stack Developer',
+   year: '2026',
+   status: 'Completed',
   },
   {
     title: 'Fieldnote — Mobile CRM',
