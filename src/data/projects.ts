@@ -133,7 +133,7 @@ export const projects: Project[] = [
     ],
     role: 'Full Stack Developer',
     year: '2026',
-    status: 'Completed',
+    status: 'Live',
   },
   {
    title: "Angkol Prito's Trucking System",
