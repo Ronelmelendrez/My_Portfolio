@@ -2,10 +2,11 @@ import orbit1 from '@/assets/images/project/orbit-1.png';
 import orbit2 from '@/assets/images/project/orbit-2.png';
 import orbit3 from '@/assets/images/project/orbit-3.png';
 import orbit4 from '@/assets/images/project/orbit-4.png';
-import pulse1 from '@/assets/images/project/pulse-1.png';
-import pulse2 from '@/assets/images/project/pulse-2.png';
-import pulse3 from '@/assets/images/project/pulse-3.png';
-import pulse4 from '@/assets/images/project/pulse-4.png';
+import apmsLandingPage from '@/assets/images/project/angkol-pritos-management-system/angkolPritosSystemLandingPage.webp';
+import apmsDashboardPage from '@/assets/images/project/angkol-pritos-management-system/angkolPritosSystemDashboardPage.webp';
+import apmsSalesPage from '@/assets/images/project/angkol-pritos-management-system/angkolPritosSystemSalesPage.webp';
+import apmsCashDrawerPage from '@/assets/images/project/angkol-pritos-management-system/angkolPritosSystemCashDrawerPage.webp';
+import apmsReportPage from '@/assets/images/project/angkol-pritos-management-system/angkolPritosSystemReportPage.webp';
 import etacsLandingPage from '@/assets/images/project/excel-to-annex-c-system/excelToAnnexlandingPage.webp';
 import etacsDashboardPage from '@/assets/images/project/excel-to-annex-c-system/excelToAnnexDashboardPage.webp';
 import etacsExcelImportPage from '@/assets/images/project/excel-to-annex-c-system/excelToAnnexExcelImportsPage.webp';
@@ -135,25 +136,45 @@ export const projects: Project[] = [
     status: 'Completed',
   },
   {
-    title: 'Pulse — Team Chat',
-    description: 'Lightweight team messaging tool with threads, search, and file sharing.',
-    tech: ['Next.js', 'Socket.io', 'PostgreSQL'],
-    gradient: '135deg, #06B6D4, #1E293B',
-    liveUrl: '#',
-    githubUrl: '#',
-    image: pulse1,
-    images: [pulse1, pulse2, pulse3, pulse4],
-    longDescription:
-      'Pulse is a lightweight team messaging tool focused on speed: threads, full-text search, and file sharing without the bloat. Messages are delivered over Socket.io with optimistic UI updates, while PostgreSQL stores the canonical history that powers instant search across every channel.',
-    features: [
-      'Real-time messaging with typing indicators and read receipts',
-      'Threaded conversations to keep channels organized',
-      'Instant full-text search across channels and files',
-      'Drag-and-drop file sharing with image previews',
-    ],
-    role: 'Full Stack Developer',
-    year: '2023',
-    status: 'In Development',
+   title: "Angkol Prito's Trucking System",
+   description:
+     "Multi-branch operations system for Angkol Prito's & Lechon Manok with role-based Admin and Employee portals, branch-specific logins, and real-time sales, payroll, and cash management.",
+   tech: [
+     'React',
+     'TypeScript',
+     'Vite',
+     'Tailwind CSS',
+     'Supabase',
+     'TanStack Query',
+     'Vercel',
+   ],
+   gradient: '135deg, #E67E22, #C0392B',
+   liveUrl: 'https://angkol-pritos-trucking-system.vercel.app/',
+   githubUrl: 'https://github.com/Ronelmelendrez/Angkol_pritos_trucking_system',
+   image: apmsLandingPage,
+   images: [
+     apmsDashboardPage,
+     apmsSalesPage,
+     apmsCashDrawerPage,
+     apmsReportPage,
+   ],
+   longDescription:
+     "Angkol Prito's Trucking System is a full-stack internal operations platform built for a multi-branch food business. It replaces scattered notebooks and manual record-keeping with one centralized system covering sales, customer orders, expenses, inventory, attendance, cash advances, utang (loans), daily cash reconciliation, payroll, and reporting. The system uses Supabase Auth and role-based access control to provide two separate experiences: an Admin portal for the owner/manager with access to every branch, and an Employee portal where each branch signs in with its own account and only sees its branch's data.",
+   features: [
+     'Role-based authentication with separate Admin and Employee portals',
+     'Branch-specific employee logins provisioned during branch creation',
+     'Branch-aware data access enforced through Supabase Row Level Security',
+     'Sales, scheduled orders, expenses, and inventory tracking',
+     'Chicken-part conversion costing and yield calculator',
+     'Attendance, cash advances, loans, and payroll with automatic deductions',
+     'Per-branch cash drawer opening, closing, and reconciliation',
+     'Reports with sales vs. expenses, profit trends, branch comparison, and insights',
+     'Mobile-first responsive design for staff working on the go',
+     'Deployed on Vercel with Supabase Postgres, Auth, and Edge Functions',
+   ],
+   role: 'Full-Stack Developer',
+   year: '2026',
+   status: 'Live',
   },
   {
    title: 'Excel-to-Annex C — CAR Management System',
@@ -196,7 +217,7 @@ export const projects: Project[] = [
    ],
    role: 'Full Stack Developer',
    year: '2026',
-   status: 'Completed',
+   status: 'Live',
   },
   {
     title: 'Fieldnote — Mobile CRM',
