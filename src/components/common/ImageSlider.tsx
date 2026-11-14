@@ -111,7 +111,7 @@ export default function ImageSlider({ images, alt }: ImageSliderProps) {
                 aria-label={`Go to image ${i + 1}`}
                 aria-current={i === index}
                 className={`h-[7px] rounded-full transition-all duration-200 ${
-                  i === index ? 'w-5 bg-[var(--cyan)]' : 'w-[7px] bg-white/50 hover:bg-white/80'
+                  i === index ? 'w-5 bg-cyan' : 'w-[7px] bg-white/50 hover:bg-white/80'
                 }`}
               />
             ))}

@@ -3,7 +3,7 @@ import tailwindcssAnimate from 'tailwindcss-animate';
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
-  darkMode: ['selector', '[data-theme="light"]'],
+  darkMode: ['selector', '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
@@ -12,10 +12,14 @@ export default {
           DEFAULT: '#1E293B',
           2: '#233047',
         },
-        blue: '#3B82F6',
-        cyan: '#06B6D4',
-        amber: '#F59E0B',
-        electric: '#3B82F6',
+        // Accents are RGB triplets so `/opacity` utilities compile and stay in
+        // sync with data-theme="light" (plain `var(--x)` colors are silently
+        // dropped by Tailwind when a modifier is applied).
+        blue: 'rgb(var(--blue-rgb) / <alpha-value>)',
+        cyan: 'rgb(var(--cyan-rgb) / <alpha-value>)',
+        amber: 'rgb(var(--amber-rgb) / <alpha-value>)',
+        success: 'rgb(var(--green-rgb) / <alpha-value>)',
+        electric: 'rgb(var(--blue-rgb) / <alpha-value>)',
         'electric-light': '#2563EB',
         graytext: '#64748B',
         surfacegray: '#F8FAFC',
@@ -34,7 +38,7 @@ export default {
           foreground: 'var(--popover-foreground)',
         },
         primary: {
-          DEFAULT: 'var(--primary)',
+          DEFAULT: 'rgb(var(--primary-rgb) / <alpha-value>)',
           foreground: 'var(--primary-foreground)',
         },
         secondary: {
@@ -46,7 +50,7 @@ export default {
           foreground: 'var(--muted-foreground)',
         },
         accent: {
-          DEFAULT: 'var(--accent)',
+          DEFAULT: 'rgb(var(--accent-rgb) / <alpha-value>)',
           foreground: 'var(--accent-foreground)',
         },
         destructive: {

@@ -13,7 +13,7 @@ const badgeVariants = cva(
         chip:
           'font-mono border-border bg-black/[0.06] text-muted-foreground hover:text-foreground hover:border-accent/40',
         verified:
-          'font-mono text-[10.5px] tracking-wide text-green-500 bg-green-500/10 border-green-500/30',
+          'font-mono text-[10.5px] tracking-wide text-success bg-success/10 border-success/30',
         pill:
           'font-mono rounded-full border-accent/25 bg-accent/[0.08] text-accent px-3 py-1.5 text-[13px]',
       },

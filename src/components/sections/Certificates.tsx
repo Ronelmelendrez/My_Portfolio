@@ -40,7 +40,7 @@ export default function Certificates() {
           <div className="manifest mt-14">
             <div className="manifest-bar font-mono text-[12.5px]">
               <span className="text-dim">
-                <span className="text-green-500">✓</span> {certificates.length} credentials verified
+                <span className="text-success">✓</span> {certificates.length} credentials verified
               </span>
               <span className="text-dim">credentials.lock</span>
             </div>

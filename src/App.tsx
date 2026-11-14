@@ -16,7 +16,7 @@ function App() {
       <ScrollToTop />
       <Suspense
         fallback={
-          <div className="flex items-center justify-center h-screen bg-navy">
+          <div className="flex items-center justify-center h-screen bg-background">
             <div className="w-16 h-16 border-4 border-electric border-t-transparent rounded-full animate-spin"></div>
           </div>
         }

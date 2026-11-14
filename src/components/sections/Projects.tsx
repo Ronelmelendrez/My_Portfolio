@@ -83,7 +83,7 @@ export default function Projects({ featured: _featured }: ProjectsProps) {
                     <a href={project.githubUrl} className="text-dim flex items-center gap-1.5">
                       <FiGithub size={13} /> GitHub
                     </a>
-                    <span className="text-dim ml-auto flex items-center gap-1.5 transition-colors group-hover:text-[var(--cyan)]">
+                    <span className="text-dim ml-auto flex items-center gap-1.5 transition-colors group-hover:text-cyan">
                       Details <FiMaximize2 size={13} />
                     </span>
                   </div>

@@ -55,7 +55,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   <i
                     className="h-[7px] w-[7px] rounded-full"
                     style={{
-                      background: current.status.toLowerCase() === 'live' ? '#22c55e' : '#f59e0b',
+                      background:
+                        current.status.toLowerCase() === 'live'
+                          ? 'var(--green)'
+                          : 'var(--amber)',
                     }}
                   />
                   {current.status}

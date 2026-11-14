@@ -45,7 +45,7 @@ export default function Skills() {
             <div className="marquee-track animate-marquee">
               {[...marqueeStack, ...marqueeStack].map(({ name, icon: Icon }, i) => (
                 <span key={i} className="flex items-center gap-2">
-                  <Icon className="text-[16px] text-[var(--cyan)]" aria-hidden />
+                  <Icon className="text-[16px] text-cyan" aria-hidden />
                   {name}
                 </span>
               ))}
