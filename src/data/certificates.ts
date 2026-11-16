@@ -23,9 +23,9 @@ export const certificates: Certificate[] = [
     credentialUrl: 'https://diana.acabai.ph/mod/customcert/verify_certificate.php',
   },
   {
-    slug: 'Virtual Assistance 101 & Smart Work Habits',
+    slug: 'Prompt Like An Engineer',
     version: '2026',
-    issuer: 'DICT South Cotabato Field Office',
+    issuer: 'CISCO Networking Academy',
     image: virtualAssistance101,
   },
   {
@@ -46,5 +46,11 @@ export const certificates: Certificate[] = [
     version: '2026',
     issuer: 'ICT Industry Development Bureau (IIDB)',
     image: aiForSmarterBusinesses,
+  },
+  {
+    slug: 'Virtual Assistance 101 & Smart Work Habits',
+    version: '2026',
+    issuer: 'DICT South Cotabato Field Office',
+    image: virtualAssistance101,
   },
 ];
