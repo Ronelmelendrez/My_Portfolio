@@ -6,6 +6,7 @@ import Certificates from "../components/sections/Certificates";
 import Projects from "../components/sections/Projects";
 import Services from "../components/sections/Services";
 import Testimonial from "../components/sections/Testimonial";
+import DeveloperLibrary from "../components/sections/DeveloperLibrary";
 import Contact from "../components/sections/Contact";
 
 const Home: React.FC = () => {
@@ -18,6 +19,7 @@ const Home: React.FC = () => {
       <Projects featured={true} />
       <Services />
       <Testimonial />
+      <DeveloperLibrary />
       <Contact />
     </>
   );
