@@ -3,6 +3,7 @@ import vcWebinarForStartups from '@/assets/images/certificate/VC _WEBINAR _FOR_S
 import theAiAdvantage from '@/assets/images/certificate/THE_AI_ADVANTAGE.webp';
 import designThinkingProcess from '@/assets/images/certificate/DESIGN_THINKING_PROCESS.webp';
 import aiForSmarterBusinesses from '@/assets/images/certificate/AI_FOR_SMARTER_BUSINESSES.webp';
+import promptLikeAnEngineer from '@/assets/images/certificate/PROMPT_LIKE_AN_ENGINEER.webp';
 
 export interface Certificate {
   slug: string;
@@ -26,7 +27,7 @@ export const certificates: Certificate[] = [
     slug: 'Prompt Like An Engineer',
     version: '2026',
     issuer: 'CISCO Networking Academy',
-    image: virtualAssistance101,
+    image: promptLikeAnEngineer,
   },
   {
     slug: 'From Ideas to Investment: VC Webinar for Startups',
