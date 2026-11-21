@@ -7,7 +7,6 @@ import Projects from "../components/sections/Projects";
 import Services from "../components/sections/Services";
 import Testimonial from "../components/sections/Testimonial";
 import DeveloperLibrary from "../components/sections/DeveloperLibrary";
-import Decisions from "../components/sections/Decisions";
 import Contact from "../components/sections/Contact";
 
 const Home: React.FC = () => {
@@ -18,7 +17,6 @@ const Home: React.FC = () => {
       <Skills />
       <Certificates />
       <Projects featured={true} />
-      <Decisions />
       <Services />
       <Testimonial />
       <DeveloperLibrary />
