@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { href: '#skills', label: 'Skills' },
   { href: '#certificates', label: 'Certificates' },
   { href: '#projects', label: 'Projects' },
+  { href: '#decisions', label: 'Decisions' },
   { href: '#services', label: 'Services' },
   { href: '#library', label: 'Library' },
   { href: '#contact', label: 'Contact' },
@@ -32,7 +33,7 @@ export default function Navbar({ activeSection, theme, onToggleTheme }: NavbarPr
         <div
           className={`${
             open ? 'flex' : 'hidden'
-          } fixed inset-x-0 top-[68px] flex-col gap-[18px] border-b py-5 px-6 md:static md:flex md:flex-row md:items-center md:gap-8 md:border-none md:p-0`}
+          } fixed inset-x-0 top-[68px] flex-col gap-[18px] border-b py-5 px-6 lg:static lg:flex lg:flex-row lg:items-center lg:gap-8 lg:border-none lg:p-0`}
           style={{ background: open ? 'var(--bg)' : 'transparent', borderColor: 'var(--border-dark)' }}
         >
           {NAV_ITEMS.map((item) => (
@@ -57,7 +58,7 @@ export default function Navbar({ activeSection, theme, onToggleTheme }: NavbarPr
           <Button
             variant="outline"
             size="icon"
-            className="md:hidden"
+            className="lg:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label="Menu"
           >
