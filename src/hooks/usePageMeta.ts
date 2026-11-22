@@ -14,13 +14,29 @@ function setMetaDescription(content: string) {
   tag.setAttribute('content', content);
 }
 
+function setMetaProperty(property: string, content: string) {
+  let tag = document.querySelector(`meta[property="${property}"]`);
+  if (!tag) {
+    tag = document.createElement('meta');
+    tag.setAttribute('property', property);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute('content', content);
+}
+
 /**
- * Sets the per-page document title ("<page> | Ronel Melendrez") and the
- * meta description for SEO. Omitted values fall back to the site defaults.
+ * Sets the per-page document title ("<page> | Ronel Melendrez"), the meta
+ * description, and the Open Graph title/description so link previews match
+ * the page. Omitted values fall back to the site defaults.
  */
 export default function usePageMeta(title?: string, description?: string) {
   useEffect(() => {
-    document.title = title ? `${title} | ${BRAND}` : `${BRAND} — Portfolio`;
-    setMetaDescription(description ?? DEFAULT_DESCRIPTION);
+    const docTitle = title ? `${title} | ${BRAND}` : `${BRAND} — Portfolio`;
+    const desc = description ?? DEFAULT_DESCRIPTION;
+
+    document.title = docTitle;
+    setMetaDescription(desc);
+    setMetaProperty('og:title', docTitle);
+    setMetaProperty('og:description', desc);
   }, [title, description]);
 }
