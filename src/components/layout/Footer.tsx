@@ -42,7 +42,7 @@ const Footer = () => {
 
       {/* Footer Content */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 py-10">
+        <div className="mx-auto max-w-7xl px-6 pt-10 pb-28 lg:pb-10">
           <div className="grid gap-10 md:grid-cols-3 md:items-center">
 
             {/* Brand */}

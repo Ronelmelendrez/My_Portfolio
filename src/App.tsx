@@ -4,6 +4,7 @@ import MainLayout from "./layouts/MainLayout";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import ScrollProgress from "./components/common/ScrollProgress";
 import BackToTop from "./components/common/BackToTop";
+import StickyMobileCta from "./components/common/StickyMobileCta";
 
 const Home = lazy(() => import("./pages/Home"));
 const Projects = lazy(() => import("./pages/Projects"));
@@ -32,6 +33,7 @@ function App() {
         </Routes>
       </Suspense>
       <BackToTop />
+      <StickyMobileCta />
     </>
   );
 }
