@@ -19,6 +19,14 @@ export default function Hero() {
       </div>
       <Container className="relative z-10 grid grid-cols-1 items-center gap-14 md:grid-cols-[1.05fr_0.95fr]">
         <div>
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-success/30 bg-success/10 px-3.5 py-1.5 font-mono text-[12.5px] text-success">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
+            </span>
+            Available for new projects
+          </div>
+
           <h1 className="mb-5 font-display text-[clamp(38px,5.4vw,60px)] font-bold leading-[1.08] tracking-tight">
             Building software
             <br />
@@ -31,6 +39,9 @@ export default function Hero() {
           </p>
 
           <div className="mb-11 flex flex-wrap gap-3.5">
+            <Button asChild>
+              <a href="#contact">Start a project →</a>
+            </Button>
             <Button asChild>
               <a href="#">↓ Download Resume</a>
             </Button>
