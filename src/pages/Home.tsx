@@ -1,4 +1,5 @@
 import React from "react";
+import usePageTitle from "../hooks/usePageTitle";
 import Hero from "../components/sections/Hero";
 import About from "../components/sections/About";
 import Skills from "../components/sections/Skills";
@@ -10,6 +11,8 @@ import DeveloperLibrary from "../components/sections/DeveloperLibrary";
 import Contact from "../components/sections/Contact";
 
 const Home: React.FC = () => {
+  usePageTitle('Full-Stack Developer');
+
   return (
     <>
       <Hero />

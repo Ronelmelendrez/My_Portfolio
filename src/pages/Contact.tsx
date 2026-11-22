@@ -1,9 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
+import usePageTitle from "../hooks/usePageTitle";
 import ContactSection from "../components/sections/Contact";
 import Container from "../components/common/Container";
 
 const ContactPage: React.FC = () => {
+  usePageTitle('Contact');
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import usePageTitle from '../hooks/usePageTitle';
 import Container from '../components/common/Container';
 import { Button } from '@/components/ui/button';
 
 const NotFound: React.FC = () => {
   const { pathname } = useLocation();
+  usePageTitle('Page Not Found');
 
   return (
     <motion.div
