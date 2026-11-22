@@ -1,0 +1,8 @@
+# robots.txt - Ronel Melendrez portfolio
+# https://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+Allow: /
+
+# Once the site is deployed, add your sitemap here:
+# Sitemap: https://your-domain.com/sitemap.xml
