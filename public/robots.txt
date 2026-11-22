@@ -4,5 +4,4 @@
 User-agent: *
 Allow: /
 
-# Once the site is deployed, add your sitemap here:
-# Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://ronelmelendrez.vercel.app/sitemap.xml
