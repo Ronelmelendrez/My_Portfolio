@@ -39,7 +39,7 @@ export default function About() {
              <div className="relative h-72 w-72 md:h-80 md:w-80 lg:h-96 lg:w-96 overflow-hidden rounded-full border border-border bg-card">
                 <img
                    src={meImage}
-                   alt="Ronel Melendrez"
+                   alt="Portrait of Ronel Melendrez"
                    className="h-full w-full object-cover"
                  />
              </div>

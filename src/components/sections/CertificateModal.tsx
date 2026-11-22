@@ -13,7 +13,7 @@ export default function CertificateModal({ cert, onClose }: CertificateModalProp
         <div className="overflow-hidden bg-black/40">
           <img
             src={cert.image}
-            alt={`${cert.slug} certificate`}
+            alt={`${cert.slug.trim()} certificate`}
             className="block max-h-[80vh] w-full object-contain"
           />
         </div>

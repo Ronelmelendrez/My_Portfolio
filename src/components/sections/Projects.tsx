@@ -51,7 +51,7 @@ export default function Projects({ featured: _featured }: ProjectsProps) {
                   <div className="pcard-img overflow-hidden">
                     <img
                       src={project.image}
-                      alt={project.title}
+                      alt={`Preview of ${project.title}`}
                       className="h-full w-full object-cover"
                     />
                   </div>
