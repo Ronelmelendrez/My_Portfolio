@@ -147,6 +147,35 @@ body {
     opacity: 0.35;
   }
 
+  /* background glow orbs — static */
+  .atmos-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+  }
+  .atmos-orb-a {
+    top: -10%;
+    left: -6%;
+    width: 460px;
+    height: 460px;
+    background: radial-gradient(circle, rgb(var(--blue-rgb) / 0.38), transparent 68%);
+  }
+  .atmos-orb-b {
+    top: 30%;
+    right: -10%;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, rgb(var(--cyan-rgb) / 0.3), transparent 68%);
+  }
+  .atmos-orb-c {
+    bottom: -14%;
+    left: 26%;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgb(var(--blue-rgb) / 0.26), transparent 70%);
+  }
+
   .text-dim {
     color: var(--text-dim);
   }

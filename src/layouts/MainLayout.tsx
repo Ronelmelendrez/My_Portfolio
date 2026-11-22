@@ -9,7 +9,11 @@ const MainLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="bg-atmos" aria-hidden="true" />
+      <div className="bg-atmos" aria-hidden="true">
+        <span className="atmos-orb atmos-orb-a" />
+        <span className="atmos-orb atmos-orb-b" />
+        <span className="atmos-orb atmos-orb-c" />
+      </div>
       <Navbar activeSection="" theme={theme} onToggleTheme={toggleTheme} />
       <main className="flex-grow pt-20">
         <Outlet />
