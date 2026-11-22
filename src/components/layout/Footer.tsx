@@ -6,19 +6,19 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-32 border-t border-border bg-card">
+    <footer className="mt-24 border-t border-border bg-card md:mt-32">
       {/* CTA */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
         <TechIconsBg seed={99} count={16} opacity={0.22} />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-24">
+        <div className="relative mx-auto max-w-7xl px-6 py-16 sm:py-24">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-sm uppercase tracking-[0.3em] text-primary font-medium">
               Let's Build Something Amazing
             </p>
 
-            <h2 className="mt-4 text-5xl md:text-6xl font-display font-bold tracking-tight">
+            <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight">
               Ready to work{" "}
               <span className="grad-text">together?</span>
             </h2>

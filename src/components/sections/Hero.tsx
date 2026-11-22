@@ -7,7 +7,7 @@ import TypedCode from './TypedCode';
 
 export default function Hero() {
   return (
-    <section id="home" className="relative flex min-h-screen items-center overflow-hidden pt-[5px]">
+    <section id="home" className="relative flex min-h-screen items-center overflow-hidden pt-24 md:pt-[5px]">
       <div className="absolute inset-0 opacity-45">
         <Ballpit
           count={100}
@@ -50,7 +50,7 @@ export default function Hero() {
             </Button>
           </div>
 
-          <div className="flex gap-9">
+          <div className="flex flex-wrap gap-x-8 gap-y-4 sm:gap-x-9">
             <div>
               <Counter target={2} className="font-display block text-2xl" />
               <span className="text-dim text-[12.5px]">Years Experience</span>

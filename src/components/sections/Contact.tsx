@@ -20,7 +20,7 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section id="contact" className="py-[120px]">
+    <section id="contact" className="py-20 md:py-[120px]">
       <Container>
         <Reveal>
           <SectionTitle

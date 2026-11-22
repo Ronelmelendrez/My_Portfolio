@@ -5,8 +5,8 @@ import meImage from '@/assets/images/me.webp';
 
 export default function About() {
   return (
-    <section id="about" className="py-[120px]">
-      <Container className="grid grid-cols-1 items-center gap-16 md:grid-cols-[0.9fr_1.1fr]">
+    <section id="about" className="py-20 md:py-[120px]">
+      <Container className="grid grid-cols-1 items-center gap-10 md:gap-16 md:grid-cols-[0.9fr_1.1fr]">
         <Reveal>
           <SectionTitle
             eyebrow="ABOUT"
@@ -31,7 +31,7 @@ export default function About() {
 
         <Reveal delay={0.1}>
           <div className="flex justify-center md:justify-end">
-            <div className="relative p-3 mt-10">
+            <div className="relative p-3 mt-4 md:mt-10">
              {/* Glow */}
              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-accent to-primary opacity-40 blur-2xl" />
 

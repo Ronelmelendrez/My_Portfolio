@@ -13,7 +13,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-[120px]">
+    <section id="services" className="py-20 md:py-[120px]">
       <Container>
         <Reveal>
           <SectionTitle eyebrow="SERVICES" title="What I can take off your plate." />

@@ -17,7 +17,7 @@ export default function Testimonials() {
   const current = testimonials[index];
 
   return (
-    <section id="testimonials" className="py-[120px]">
+    <section id="testimonials" className="py-20 md:py-[120px]">
       <Container>
         <Reveal>
           <SectionTitle eyebrow="TESTIMONIALS" title="Don't take my word for it." center />

@@ -6,7 +6,7 @@ import { libraryCategories } from '@/data/library';
 
 export default function DeveloperLibrary() {
   return (
-    <section id="library" className="py-[120px]">
+    <section id="library" className="py-20 md:py-[120px]">
       <Container>
         <Reveal>
           <SectionTitle

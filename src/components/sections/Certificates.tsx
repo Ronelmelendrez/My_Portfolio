@@ -26,7 +26,7 @@ export default function Certificates() {
   };
 
   return (
-    <section id="certificates" className="py-[120px]">
+    <section id="certificates" className="py-20 md:py-[120px]">
       <Container>
         <Reveal>
           <SectionTitle

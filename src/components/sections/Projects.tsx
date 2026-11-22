@@ -16,7 +16,7 @@ export default function Projects({ featured: _featured }: ProjectsProps) {
   const [selected, setSelected] = useState<Project | null>(null);
 
   return (
-    <section id="projects" className="py-[120px]">
+    <section id="projects" className="py-20 md:py-[120px]">
       <Container>
         <Reveal>
           <SectionTitle
