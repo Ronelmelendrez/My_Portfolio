@@ -1,10 +1,16 @@
 // src/pages/Projects.tsx
 import React from "react";
+import usePageMeta from "../hooks/usePageMeta";
 import ProjectsSection from "../components/sections/Projects";
 import Container from "../components/common/Container";
 import { motion } from "framer-motion";
 
 const ProjectsPage: React.FC = () => {
+  usePageMeta(
+    'Projects',
+    'A complete portfolio of web applications and software solutions — Farm2Home, Angkol Prito’s Trucking System, Excel-to-Annex C, and more.',
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

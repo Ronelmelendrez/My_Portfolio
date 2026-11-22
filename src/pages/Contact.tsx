@@ -1,11 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
-import usePageTitle from "../hooks/usePageTitle";
+import usePageMeta from "../hooks/usePageMeta";
 import ContactSection from "../components/sections/Contact";
 import Container from "../components/common/Container";
 
 const ContactPage: React.FC = () => {
-  usePageTitle('Contact');
+  usePageMeta(
+    'Contact',
+    'Have a project in mind? Get in touch with Ronel Melendrez to discuss your idea and how I can help bring it to life.',
+  );
 
   return (
     <motion.div

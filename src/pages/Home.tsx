@@ -1,5 +1,5 @@
 import React from "react";
-import usePageTitle from "../hooks/usePageTitle";
+import usePageMeta from "../hooks/usePageMeta";
 import Hero from "../components/sections/Hero";
 import About from "../components/sections/About";
 import Skills from "../components/sections/Skills";
@@ -11,7 +11,10 @@ import DeveloperLibrary from "../components/sections/DeveloperLibrary";
 import Contact from "../components/sections/Contact";
 
 const Home: React.FC = () => {
-  usePageTitle('Full-Stack Developer');
+  usePageMeta(
+    'Full-Stack Developer',
+    'Ronel Melendrez — full-stack developer building fast, reliable web systems from database schema to pixel. See skills, certificates, projects, and services.',
+  );
 
   return (
     <>
