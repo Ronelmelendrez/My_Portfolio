@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
+import { useState, type FormEvent } from 'react';
+import { FiLoader, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
 import Reveal from '../common/Reveal';
 import Container from '../common/Container';
 import SectionTitle from '../common/SectionTitle';
@@ -17,7 +17,19 @@ const infoItems = [
 ];
 
 export default function Contact() {
+  const [sending, setSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (sending) return;
+    setSending(true);
+    // Simulated network round-trip for the demo form.
+    window.setTimeout(() => {
+      setSending(false);
+      setSubmitted(true);
+    }, 900);
+  };
 
   return (
     <section id="contact" className="py-20 md:py-[120px]">
@@ -48,12 +60,7 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSubmitted(true);
-              }}
-            >
+            <form onSubmit={handleSubmit}>
               <div className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                   <Label htmlFor="name">Name</Label>
@@ -72,8 +79,9 @@ export default function Contact() {
                 <Label htmlFor="message">Message</Label>
                 <Textarea id="message" rows={5} placeholder="Tell me about the project..." required />
               </div>
-              <Button type="submit" className="w-full justify-center">
-                {submitted ? 'Message Sent ✓' : 'Send Message'}
+              <Button type="submit" disabled={sending} className="w-full justify-center">
+                {sending && <FiLoader className="animate-spin" size={15} />}
+                {sending ? 'Sending…' : submitted ? 'Message Sent ✓' : 'Send Message'}
               </Button>
             </form>
           </Reveal>

@@ -1,4 +1,5 @@
 import Modal from '../common/Modal';
+import LazyImage from '../common/LazyImage';
 import type { Certificate } from '@/data/certificates';
 
 interface CertificateModalProps {
@@ -11,10 +12,12 @@ export default function CertificateModal({ cert, onClose }: CertificateModalProp
     <Modal open={!!cert} onClose={onClose} className="max-w-3xl">
       {cert?.image && (
         <div className="overflow-hidden bg-black/40">
-          <img
+          <LazyImage
             src={cert.image}
             alt={`${cert.slug.trim()} certificate`}
-            className="block max-h-[80vh] w-full object-contain"
+            wrapperClassName="w-full"
+            className="max-h-[80vh] w-full object-contain"
+            decoding="async"
           />
         </div>
       )}

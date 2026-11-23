@@ -3,6 +3,7 @@ import { FiExternalLink, FiGithub, FiMaximize2 } from 'react-icons/fi';
 import Reveal from '../common/Reveal';
 import Container from '../common/Container';
 import SectionTitle from '../common/SectionTitle';
+import LazyImage from '../common/LazyImage';
 import ProjectModal from './ProjectModal';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -49,10 +50,13 @@ export default function Projects({ featured: _featured }: ProjectsProps) {
                 </div>
                 {project.image ? (
                   <div className="pcard-img overflow-hidden">
-                    <img
+                    <LazyImage
                       src={project.image}
                       alt={`Preview of ${project.title}`}
+                      wrapperClassName="h-full w-full"
                       className="h-full w-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 ) : (

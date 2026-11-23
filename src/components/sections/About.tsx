@@ -1,6 +1,7 @@
 import Reveal from '../common/Reveal';
 import Container from '../common/Container';
 import SectionTitle from '../common/SectionTitle';
+import LazyImage from '../common/LazyImage';
 import meImage from '@/assets/images/me.webp';
 
 export default function About() {
@@ -37,10 +38,13 @@ export default function About() {
 
              {/* Image */}
              <div className="relative h-72 w-72 md:h-80 md:w-80 lg:h-96 lg:w-96 overflow-hidden rounded-full border border-border bg-card">
-                <img
+                <LazyImage
                    src={meImage}
                    alt="Portrait of Ronel Melendrez"
+                   wrapperClassName="h-full w-full"
                    className="h-full w-full object-cover"
+                   loading="lazy"
+                   decoding="async"
                  />
              </div>
            </div>

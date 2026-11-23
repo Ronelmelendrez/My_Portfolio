@@ -5,6 +5,7 @@ import ScrollToTop from "./components/layout/ScrollToTop";
 import ScrollProgress from "./components/common/ScrollProgress";
 import BackToTop from "./components/common/BackToTop";
 import StickyMobileCta from "./components/common/StickyMobileCta";
+import RouteLoader from "./components/common/RouteLoader";
 
 const Home = lazy(() => import("./pages/Home"));
 const Projects = lazy(() => import("./pages/Projects"));
@@ -16,13 +17,7 @@ function App() {
     <>
       <ScrollProgress />
       <ScrollToTop />
-      <Suspense
-        fallback={
-          <div className="flex items-center justify-center h-screen bg-background">
-            <div className="w-16 h-16 border-4 border-electric border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        }
-      >
+      <Suspense fallback={<RouteLoader />}>
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />

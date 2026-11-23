@@ -25,6 +25,7 @@ const slideVariants = {
  */
 export default function ImageSlider({ images, alt }: ImageSliderProps) {
   const [[index, direction], setSlide] = useState<SlideState>([0, 1]);
+  const [imgLoaded, setImgLoaded] = useState(false);
   const reduceMotion = useReducedMotion();
   const count = images.length;
 
@@ -55,7 +56,7 @@ export default function ImageSlider({ images, alt }: ImageSliderProps) {
 
   return (
     <div
-      className="relative h-[45vh] shrink-0 overflow-hidden"
+      className={`relative h-[45vh] shrink-0 overflow-hidden ${imgLoaded ? '' : 'img-skeleton'}`}
       role="region"
       aria-roledescription="carousel"
       aria-label={`${alt} gallery`}
@@ -65,6 +66,7 @@ export default function ImageSlider({ images, alt }: ImageSliderProps) {
           key={index}
           src={images[index]}
           alt={`${alt} — image ${index + 1} of ${count}`}
+          onLoad={() => setImgLoaded(true)}
           className="absolute inset-0 h-full w-full select-none object-cover"
           draggable={false}
           custom={direction}
