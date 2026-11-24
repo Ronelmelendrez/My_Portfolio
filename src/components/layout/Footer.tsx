@@ -30,7 +30,7 @@ const Footer = () => {
 
             <div className="mt-10">
               <Link
-                to="#contact"
+                to="/#contact"
                 className="btn btn-primary rounded-xl px-8 py-4"
               >
                 Get in Touch

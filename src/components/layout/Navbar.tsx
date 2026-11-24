@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FiMenu, FiMoon, FiSun } from 'react-icons/fi';
 import Container from '../common/Container';
 import { Button } from '@/components/ui/button';
@@ -21,11 +22,34 @@ interface NavbarProps {
 
 export default function Navbar({ activeSection, theme, onToggleTheme }: NavbarProps) {
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  /**
+   * Section links work from every page: they always resolve to the home
+   * route's section (/#about), and re-scroll when already at that hash.
+   */
+  const goTo = (hash: string) => {
+    if (pathname === '/' && window.location.hash === hash) {
+      document
+        .getElementById(hash.slice(1))
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    navigate({ pathname: '/', hash });
+  };
 
   return (
     <nav className="nav-blur fixed inset-x-0 top-0 z-[100]">
       <Container className="flex h-[68px] items-center justify-between">
-        <a href="#home" className="font-mono text-[17px] font-semibold tracking-tight">
+        <a
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+            goTo('#home');
+          }}
+          className="font-mono text-[17px] font-semibold tracking-tight"
+        >
           <span className="text-blue">&lt;</span>Ronel<span className="text-blue">/&gt;</span>
         </a>
 
@@ -39,7 +63,11 @@ export default function Navbar({ activeSection, theme, onToggleTheme }: NavbarPr
             <a
               key={item.href}
               href={item.href}
-              onClick={() => setOpen(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                setOpen(false);
+                goTo(item.href);
+              }}
               className={`nav-link ${activeSection === item.href.slice(1) ? 'active' : ''}`}
             >
               {item.label}
@@ -52,7 +80,15 @@ export default function Navbar({ activeSection, theme, onToggleTheme }: NavbarPr
             {theme === 'dark' ? <FiSun size={16} /> : <FiMoon size={16} />}
           </Button>
           <Button asChild size="sm">
-            <a href="#contact">Hire Me</a>
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                goTo('#contact');
+              }}
+            >
+              Hire Me
+            </a>
           </Button>
           <Button
             variant="outline"
