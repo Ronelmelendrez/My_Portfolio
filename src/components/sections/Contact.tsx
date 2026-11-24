@@ -1,4 +1,5 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FiAlertCircle, FiAlertTriangle, FiLoader, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
 import Reveal from '../common/Reveal';
 import Container from '../common/Container';
@@ -44,6 +45,7 @@ function validate(values: FormValues): FormErrors {
 }
 
 export default function Contact() {
+  const navigate = useNavigate();
   const [values, setValues] = useState<FormValues>({
     name: '',
     email: '',
@@ -53,7 +55,6 @@ export default function Contact() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [attempted, setAttempted] = useState(false);
   const [sending, setSending] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
 
   const errorCount = Object.values(errors).filter(Boolean).length;
 
@@ -68,9 +69,7 @@ export default function Contact() {
     (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const next = { ...values, [field]: event.target.value };
       setValues(next);
-      // Editing a field clears its success state…
-      if (submitted) setSubmitted(false);
-      // …and live-fixes the error once the field has been touched or submitted.
+      // Live-fix the error once the field has been touched or submitted.
       if (attempted || errors[field]) revalidate(field, next);
     };
 
@@ -92,10 +91,10 @@ export default function Contact() {
     if (sending) return;
 
     setSending(true);
-    // Simulated network round-trip for the demo form.
+    // Simulated network round-trip for the demo form, then confirmation.
     window.setTimeout(() => {
       setSending(false);
-      setSubmitted(true);
+      navigate('/thank-you');
     }, 900);
   };
 
@@ -236,7 +235,7 @@ export default function Contact() {
 
               <Button type="submit" disabled={sending} className="w-full justify-center">
                 {sending && <FiLoader className="animate-spin" size={15} />}
-                {sending ? 'Sending…' : submitted ? 'Message Sent ✓' : 'Send Message'}
+                {sending ? 'Sending…' : 'Send Message'}
               </Button>
             </form>
           </Reveal>
