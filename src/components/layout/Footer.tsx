@@ -70,6 +70,13 @@ const Footer = () => {
               <p className="mt-1 text-xs text-dim">
                 Crafted with React, TypeScript & Tailwind CSS
               </p>
+
+              <Link
+                to="/privacy-policy"
+                className="mt-2 inline-block font-mono text-xs text-dim underline-offset-4 transition-colors hover:text-cyan hover:underline"
+              >
+                Privacy Policy
+              </Link>
             </div>
 
           </div>
